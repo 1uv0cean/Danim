@@ -12,6 +12,8 @@ target 'Danim_FE' do
     :hermes_enabled => false
   )
 
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   target 'Danim_FETests' do
     inherit! :complete
     # Pods for testing
