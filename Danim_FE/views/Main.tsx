@@ -21,7 +21,7 @@ interface MainScreenProps {
   }
 
 const Main: React.FunctionComponent<MainScreenProps> = (props) =>{
-    const { route} = props;
+    const {route} = props;
     const {params} = route;
     const {symbol} = params;
     return (

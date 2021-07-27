@@ -10,7 +10,7 @@ align-items: center;
 const PhoneInput = () => {
     return (
         <TextInput
-            placeholder=" 휴대폰 번호   예)01012345678 "
+            placeholder=" 예)01012345678 "
             keyboardType="numeric"
             placeholderTextColor="#2C3E50"
         />

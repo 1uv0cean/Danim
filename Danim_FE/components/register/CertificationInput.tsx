@@ -7,7 +7,7 @@ border-width: 1px;
 justify-content: center;
 align-items: center;
 `;
-const PhoneInput = () => {
+const CertificationInput = () => {
     return (
         <TextInput
             keyboardType="numeric"
@@ -17,4 +17,4 @@ const PhoneInput = () => {
     );
 }
 
-export default PhoneInput;
+export default CertificationInput;
