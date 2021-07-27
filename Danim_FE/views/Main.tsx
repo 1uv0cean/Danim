@@ -1,10 +1,12 @@
 import React from 'react';
-import { Text, SafeAreaView } from 'react-native';
 import {
     HomeScreens,
     HomeStackParamList,
 } from '../navigators/index';
 import {StackNavigationProp} from '@react-navigation/stack';
+import GoogleMap from '../components/Main/GoogleMap';
+import SearchBar from '../components/Main/SearchBar';
+import { View } from 'react-native';
 
 type MainScreenNavigationProps = StackNavigationProp<
   HomeStackParamList,
@@ -20,15 +22,9 @@ interface MainScreenProps {
     navigation: MainScreenNavigationProps;
   }
 
-const Main: React.FunctionComponent<MainScreenProps> = (props) =>{
-    const {route} = props;
-    const {params} = route;
-    const {symbol} = params;
+const Main: React.FunctionComponent<MainScreenProps> = () =>{
     return (
-        <SafeAreaView>
-            <Text>메인페이지입니당당당</Text>
-            <Text>{symbol}</Text>
-        </SafeAreaView>
+        <GoogleMap />
     );
 }
     

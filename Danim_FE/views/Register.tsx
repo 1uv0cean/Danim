@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, SafeAreaView, Button, Alert } from 'react-native';
+import { Text, Button, Alert } from 'react-native';
 import CertificationInput from '../components/register/CertificationInput'
 import NameInput from '../components/register/NameInput'
 import PhoneInput from '../components/register/PhoneInput'
