@@ -7,14 +7,12 @@ border-width: 1px;
 justify-content: center;
 align-items: center;
 `;
-const PhoneInput = () => {
+const NameInput = () => {
     return (
         <TextInput
-            placeholder=" 휴대폰 번호   예)01012345678 "
-            keyboardType="numeric"
             placeholderTextColor="#2C3E50"
         />
     );
 }
 
-export default PhoneInput;
+export default NameInput;

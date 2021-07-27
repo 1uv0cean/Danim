@@ -40,7 +40,7 @@ const Container = styled.View`
 const CheckBoxView = styled.View`
   flex-direction: row;
   height: 40px;
-  justify-content: center;
+  margin-left: 67%;
 `;
 
 const MainText = styled.Text`
@@ -65,10 +65,11 @@ const Login: React.FunctionComponent<LoginScreenProps> = (props) => {
         />
         <EmptyView/>
         <RegisterButton onPress={() =>
-        navigation.navigate(HomeScreens.Main,{symbol})} 
+        navigation.navigate(HomeScreens.Register)} 
         color = "#2C3E50"
         title = "회원가입"
         />
+        <EmptyView/>
         <CheckBoxView>
           <LoginCheckBox/>
           <MainText>자동 로그인</MainText>
