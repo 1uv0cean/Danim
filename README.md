@@ -14,7 +14,7 @@ Navigate to the path where the app is located.
 
 ### `Add Google Maps API key to android\local.properties`
 
-add "MAPS_API_KEY= (Your Google MAPS API KEY)"
+Add "MAPS_API_KEY= (Your Google MAPS API KEY)"
 
 ### `npm i`
 
