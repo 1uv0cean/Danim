@@ -5,7 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 interface Props {}
 
-const App = ({ }:Props) => {
+const App = ({}: Props) => {
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();
@@ -13,9 +13,9 @@ const App = ({ }:Props) => {
   }, []);
   return (
     <NavigationContainer>
-    <HomeStackNavigatoer />
-  </NavigationContainer>
+      <HomeStackNavigatoer />
+    </NavigationContainer>
   );
-}
+};
 
 export default App;
