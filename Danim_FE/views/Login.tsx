@@ -7,6 +7,7 @@ import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {useState} from 'react';
 import {Alert} from 'react-native';
 import axios from 'axios';
+import {funcLogin} from '../function/funcLogin';
 
 type LoginScreenNavigationProps = StackNavigationProp<
   HomeStackParamList, // navigators/HomeStackNavigators/index.tsx 에서 지정했던 HomeStackParamList
@@ -72,12 +73,36 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
   const {navigation} = props;
   const initialSymbol: string = 'Danim';
   const [symbol, setSymbol] = useState<string>(initialSymbol);
+
+  const [userPhone, setUserPhone] = useState<string>('');
+
+  // author : 차민재
+  // userphone 입력 시 값 바인딩
+  const setterUserPhone = (value: string) => {
+    setUserPhone(value);
+  };
+
+  // doLogin
+  const doLogin = async () => {
+    try {
+      let getLoginResult = await funcLogin({userPhone});
+      if (getLoginResult) {
+        navigation.navigate(HomeScreens.Main, {symbol});
+      } else {
+        Alert.alert('정보를 확인해주세요.');
+      }
+    } catch (e) {
+      Alert.alert('오류 발생');
+    }
+  };
+
   return (
     <Container>
-      <PhoneInput />
+      <PhoneInput setterUserPhone={setterUserPhone} />
       <EmptyView />
       <LoginButton
-        onPress={() => navigation.navigate(HomeScreens.Main, {symbol})}
+        // onPress={() => navigation.navigate(HomeScreens.Main, {symbol})}
+        onPress={doLogin}
         color="#2C3E50"
         title="로그인"
       />
