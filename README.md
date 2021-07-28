@@ -1,6 +1,6 @@
-# Danim_FE
+# Danim
 
-Low floor bus reservation app Danim Front-End using React-Native
+Low floor bus reservation app Danim
 
 ## How To Start
 
