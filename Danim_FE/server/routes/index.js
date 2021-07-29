@@ -19,7 +19,7 @@ router.post('/api/register', (req, res) => {
   const userName = req.body.userName;
   const userPhone = req.body.userPhone;
   db.query(
-    'INSERT INTO user(userName, userPhone) VALUES(?,?)',
+    'INSERT INTO member(userName, userPhone) VALUES(?,?)',
     [userName, userPhone],
     (err, result) => {
       if (!err) {
@@ -34,7 +34,7 @@ router.post('/api/register', (req, res) => {
 router.post('/api/login', (req, res) => {
   const userPhone = req.body.userPhone;
   db.query(
-    'SELECT COUNT(*) FROM user WHERE userPhone = ?',
+    'SELECT COUNT(*) FROM member WHERE userPhone = ?',
     [userPhone],
     (err, result) => {
       if (!err) {
