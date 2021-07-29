@@ -26,6 +26,5 @@ const Main: React.FunctionComponent<MainScreenProps> = () =>{
     return (
         <GoogleMap />
     );
-}
-    
+}   
 export default Main
