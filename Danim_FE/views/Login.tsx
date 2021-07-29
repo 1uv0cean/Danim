@@ -69,6 +69,13 @@ const ServerButton = styled.Button`
   align-items: center;
 `;
 
+//sm
+//mypage 이동 버튼 
+const SMButton = styled.Button`
+   justify-content: center;
+   align-items: center;
+   `;
+
 const Login: React.FunctionComponent<LoginScreenProps> = props => {
   const {navigation} = props;
   const initialSymbol: string = 'Danim';
@@ -113,6 +120,11 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
         title="회원가입"
       />
       <EmptyView />
+      <SMButton
+        onPress={() => navigation.navigate(HomeScreens.MyPage)}
+        color="#2C3E50"
+        title="Mypage"
+      />
       <CheckBoxView>
         <LoginCheckBox />
         <MainText>자동 로그인</MainText>
