@@ -45,12 +45,17 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
   // doRegister
   const doRegister = async () => {
     try {
-      let getRegisterResult = await funcRegister({userName, userPhone});
-      if (getRegisterResult) {
-        Alert.alert('회원가입 성공');
-        navigation.navigate(HomeScreens.RegisterWait);
+      // 데이터 검증 단계
+      if (userName !== '' && userPhone !== '') {
+        let getRegisterResult = await funcRegister({userName, userPhone});
+        if (getRegisterResult) {
+          Alert.alert('회원가입 성공');
+          navigation.navigate(HomeScreens.RegisterWait);
+        } else {
+          Alert.alert('오류 발생');
+        }
       } else {
-        Alert.alert('오류 발생');
+        Alert.alert('정보를 입력해주세요.');
       }
     } catch (e) {
       Alert.alert('오류 발생');
