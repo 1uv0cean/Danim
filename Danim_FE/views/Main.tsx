@@ -20,7 +20,12 @@ interface MainScreenProps {
 }
 
 const Main: React.FunctionComponent<MainScreenProps> = () => {
-  return <GoogleMap />;
+  return (
+    <View>
+      <SearchBar />
+      <GoogleMap />
+    </View>
+  );
 };
 
 export default Main;
