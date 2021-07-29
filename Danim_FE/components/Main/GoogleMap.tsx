@@ -5,7 +5,7 @@ import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    height: 665,
+    height: 615,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },

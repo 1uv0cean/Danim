@@ -21,10 +21,14 @@ interface MainScreenProps {
 
 const Main: React.FunctionComponent<MainScreenProps> = () => {
   return (
+    <>
     <View>
       <SearchBar />
+    </View>
+    <View>
       <GoogleMap />
     </View>
+    </>
   );
 };
 
