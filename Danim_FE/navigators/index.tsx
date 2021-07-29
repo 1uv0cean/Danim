@@ -29,11 +29,8 @@ const HomeStackNavigator: React.FunctionComponent = () => {
       <HomeStack.Screen name={HomeScreens.Login} component={Login} />
       <HomeStack.Screen name={HomeScreens.Main} component={Main} />
       <HomeStack.Screen name={HomeScreens.Register} component={Register} />
-      <HomeStack.Screen
-        name={HomeScreens.RegisterWait}
-        component={RegisterWait}
-      />
-       <HomeStack.Screen name={HomeScreens.MyPage} component={MyPage} />
+      <HomeStack.Screen name={HomeScreens.RegisterWait} component={RegisterWait} />
+      <HomeStack.Screen name={HomeScreens.MyPage} component={MyPage} />
     </HomeStack.Navigator>
   );
 };
