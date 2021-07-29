@@ -4,7 +4,7 @@ Low floor bus reservation app Danim
 
 ## How To Start
 
-### `git clone https://github.com/songhwee1/Danim_FE.git`
+### `git clone https://github.com/songhwee1/Danim.git`
 
 Clone the repository to your device.
 
