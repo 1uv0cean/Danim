@@ -78,9 +78,6 @@ const SMButton = styled.Button`
 
 const Login: React.FunctionComponent<LoginScreenProps> = props => {
   const {navigation} = props;
-  const initialSymbol: string = 'Danim';
-  const [symbol, setSymbol] = useState<string>(initialSymbol);
-
   const [userPhone, setUserPhone] = useState<string>('');
 
   // author : 차민재
@@ -94,7 +91,7 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
     try {
       let getLoginResult = await funcLogin({userPhone});
       if (getLoginResult) {
-        navigation.navigate(HomeScreens.Main, {symbol});
+        navigation.navigate(HomeScreens.Main);
       } else {
         Alert.alert('정보를 확인해주세요.');
       }

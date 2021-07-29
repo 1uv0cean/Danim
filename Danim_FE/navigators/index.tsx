@@ -16,7 +16,7 @@ export enum HomeScreens {
 
 export type HomeStackParamList = {
   Login: undefined;
-  Main: MainParams;
+  Main: undefined;
   Register: undefined;
   RegisterWait: undefined;
   MyPage: undefined;
