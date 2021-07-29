@@ -20,6 +20,6 @@ Add "MAPS_API_KEY= (Your Google MAPS API KEY)"
 
 Install the required module.
 
-### `react-native run-android`
+### `npm run android`
 
 Run the app using the Android emulator.
