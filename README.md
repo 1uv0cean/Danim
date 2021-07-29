@@ -18,6 +18,12 @@ Copy local.default.properties to local.properties
 
 Add "MAPS_API_KEY= (Your Google MAPS API KEY)"
 
+### `Add your db information to server/config/db.js`
+
+Copy db.default.js to db.js
+
+Add your db information
+
 ### `npm i`
 
 Install the required module.
