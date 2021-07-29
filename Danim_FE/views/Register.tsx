@@ -7,6 +7,7 @@ import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {funcRegister} from '../function/funcRegister';
 import styled from 'styled-components/native';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const EmptyView = styled.View`
   flex: 0.05;
@@ -101,9 +102,20 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       <EmptyView />
       <EmptyView />
       <Button
-        onPress={() => Alert.alert('확인', '고양이!')}
+        onPress={() => 
+          ImagePicker.openPicker({
+          path: 'my-file-path.jpg',
+          width: 300,
+          height: 400,
+          cropping: true
+        }).then(image => {
+          setUri(image.path);
+          console.log(image);
+          let source = {uri: image.path};
+        })}
         color="#2C3E50"
         title="첨부"
+
       />
       <Text>관리자가 회원가입을 승인할 때까지 앱 사용이 제한됩니다.</Text>
       <EmptyView />
