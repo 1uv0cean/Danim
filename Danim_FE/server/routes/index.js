@@ -5,7 +5,7 @@ const db = require('../config/db');
 router.get('/api', (req, res) => {
   // console.log('detected');
   // res.json({data: 'this is index.'});
-  db.query('SELECT * FROM member', (err, result) => {
+  db.query('SELECT * FROM user;', (err, result) => {
     if (!err) {
       res.send(result);
     } else {
@@ -19,7 +19,7 @@ router.post('/api/register', (req, res) => {
   const userName = req.body.userName;
   const userPhone = req.body.userPhone;
   db.query(
-    'INSERT INTO member(userName, userPhone) VALUES(?,?)',
+    'INSERT INTO user(userName, userPhone) VALUES(?,?)',
     [userName, userPhone],
     (err, result) => {
       if (!err) {
@@ -34,7 +34,7 @@ router.post('/api/register', (req, res) => {
 router.post('/api/login', (req, res) => {
   const userPhone = req.body.userPhone;
   db.query(
-    'SELECT COUNT(*) FROM member WHERE userPhone = ?',
+    'SELECT COUNT(*) FROM user WHERE userPhone = ?',
     [userPhone],
     (err, result) => {
       if (!err) {
