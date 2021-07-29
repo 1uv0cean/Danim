@@ -5,7 +5,7 @@ const db = require('../config/db');
 router.get('/api', (req, res) => {
   // console.log('detected');
   // res.json({data: 'this is index.'});
-  db.query('SELECT * FROM user', (err, result) => {
+  db.query('SELECT * FROM member', (err, result) => {
     if (!err) {
       res.send(result);
     } else {
