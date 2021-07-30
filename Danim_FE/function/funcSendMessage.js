@@ -11,13 +11,16 @@ export function funcPostSMS({userPhone}) {
     });
   }
 
-  const user = chkPostSMS().then(response => {
-    if (response.result === 'success') {
-      return true;
+
+  const result = chkPostSMS().then(response => {
+    console.log(response);
+    if (response.code === 200) {
+      return response.certiNumber;
     } else {
       return false;
     }
   });
 
-  return user;
+
+  return result;
 }
