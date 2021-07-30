@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         padding: 11,
     },
     disabilityView:{
-        flex:3,
+        flex:4,
         borderStyle: 'solid',
         borderTopWidth: 1,
         borderTopColor: 'black',
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     allowsImage:{
         width: 25,
         height: 25,
-    }
+    },
 });
 
 const MyPage: React.FunctionComponent<MyPageScreenProps> = (props) => {
@@ -72,7 +72,7 @@ const MyPage: React.FunctionComponent<MyPageScreenProps> = (props) => {
             </View>
             <View style={styles.personalInfoView}>
                 <Text style={styles.subjectText}>개인정보수정</Text>
-                <TouchableOpacity onPress={() => navigation.navigate(HomeScreens.Login)}>
+                <TouchableOpacity onPress={() => navigation.navigate(HomeScreens.EditProfile)}>
                     <Image
                         style={styles.allowsImage} source={require('../img/arrows.png')}
                     />
