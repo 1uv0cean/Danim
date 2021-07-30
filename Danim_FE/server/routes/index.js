@@ -148,4 +148,35 @@ router.post('/api/chkDuplicate', (req, res) => {
     },
   );
 });
+
+router.get('/api/busstop', (req, res) => {
+  /* NodeJs 샘플 코드 */
+
+  var url =
+    'http://openapi.tago.go.kr/openapi/service/BusSttnInfoInqireService/getCrdntPrxmtSttnList';
+  var queryParams =
+    '?' + encodeURIComponent('ServiceKey') + '=서비스키'; /* Service Key*/
+  queryParams +=
+    '&' +
+    encodeURIComponent('gpsLati') +
+    '=' +
+    encodeURIComponent('36.3'); /* */
+  queryParams +=
+    '&' +
+    encodeURIComponent('gpsLong') +
+    '=' +
+    encodeURIComponent('127.3'); /* */
+
+  request(
+    {
+      url: url + queryParams,
+      method: 'GET',
+    },
+    function (error, response, body) {
+      console.log('Status', response.statusCode);
+      console.log('Headers', JSON.stringify(response.headers));
+      console.log('Reponse received', body);
+    },
+  );
+});
 module.exports = router;
