@@ -3,15 +3,24 @@ import {
     HomeScreens,
     HomeStackParamList,
 } from '../navigators/index';
-import { Text, View, StyleSheet, TextInput } from 'react-native';
+import { Text, View, StyleSheet} from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Button } from 'react-native-paper';
 import PhoneNumInput from '../components/EditProfile/PhoneNumInput';
 import NumInput from '../components/EditProfile/NumInput';
 
+type EditProfileScreenNavigationProps = StackNavigationProp<
+    HomeStackParamList,
+    HomeScreens.EditProfile
+>;
+
+interface EditProfileScreenProps {
+    navigation: EditProfileScreenNavigationProps;
+}
+
 const styles = StyleSheet.create({
     container:{
-        flex:1,
+        flex: 1,
         position: 'absolute',
         width: '100%',
     },
@@ -19,7 +28,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     phoneNumChangeView:{
-        flex:3,   
+        flex: 3,
         width: '78%',
         alignSelf: 'center',
         borderRadius: 8,
@@ -42,7 +51,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     updateButton:{
-        backgroundColor: '#2C3E50',  
+        backgroundColor: '#2C3E50',
         width: '78%',     
         alignSelf: 'center',
     },
@@ -77,8 +86,7 @@ const styles = StyleSheet.create({
 });
 
 
-const EditProfile: React.FunctionComponent<EditProfileScreenProps> = (props) => {
-     const {navigation} = props;
+const EditProfile: React.FunctionComponent<EditProfileScreenProps> = () => {
      return (
        <View style={styles.container}>
             <View style={styles.idView}>

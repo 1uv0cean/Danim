@@ -9,15 +9,10 @@ const TextInput = styled.TextInput`
     borderColor: #a5a5a5;
 `;
 
-interface Props {
-  setterChangePhoneNum: (value: string) => void;
-}
-
-const PhoneNumInput: React.FC<Props> = (props: Props) => {
+const PhoneNumInput = () => {
   return (
     <TextInput
       keyboardType="numeric"
-      onChangeText={value => props.setterChangePhoneNum(value)}
     />
   );
 };
