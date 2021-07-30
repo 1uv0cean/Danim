@@ -70,7 +70,7 @@ const ServerButton = styled.Button`
 `;
 
 //sm
-//mypage 이동 버튼 
+//WriteReview 이동 버튼 
 const SMButton = styled.Button`
    justify-content: center;
    align-items: center;
@@ -118,9 +118,9 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
       />
       <EmptyView />
       <SMButton
-        onPress={() => navigation.navigate(HomeScreens.MyPage)}
+        onPress={() => navigation.navigate(HomeScreens.WriteReview)}
         color="#2C3E50"
-        title="Mypage"
+        title="WriteReview"
       />
       <CheckBoxView>
         <LoginCheckBox />

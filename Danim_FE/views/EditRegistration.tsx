@@ -103,7 +103,7 @@ const EditRegistration: React.FunctionComponent<EditRegistrationScreenProps> = (
                 <Button style={styles.attachmentButton}>
                     <Text style={styles.buttonText2}>첨부</Text>
                 </Button>
-                <Text style={styles.cautionText}> 관리자가 장애인등록증 수정을 승일할 때까지 {"\n"} 앱 사용이 제한됩니다.</Text>
+                <Text style={styles.cautionText}> 관리자가 장애인등록증 수정을 승인할 때까지 {"\n"} 앱 사용이 제한됩니다.</Text>
             </View>
             <View style={styles.buttonView}>
                 <Button style={styles.updateButton}>
