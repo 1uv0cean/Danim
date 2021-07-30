@@ -42,7 +42,7 @@ function GoogleMap() {
           latitude,
           longitude,
         });
-        doGetBusstop();
+        //doGetBusstop();
       },
       error => {
         console.log(error.code, error.message);
