@@ -91,7 +91,7 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
     try {
       let getLoginResult = await funcLogin({userPhone});
       if (getLoginResult) {
-        navigation.navigate(HomeScreens.Main);
+        navigation.navigate(HomeScreens.TabNavigator);
       } else {
         Alert.alert('정보를 확인해주세요.');
       }
