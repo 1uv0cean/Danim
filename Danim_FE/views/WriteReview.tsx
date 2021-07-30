@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, Image, View, StarRating} from 'react-native';
+import { Text, StyleSheet, Image, View} from 'react-native';
 import {
     HomeScreens,
     HomeStackParamList,

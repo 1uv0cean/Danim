@@ -5,7 +5,6 @@ import {
     HomeStackParamList,
 } from '../navigators/index';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { redA700 } from 'react-native-paper/lib/typescript/styles/colors';
 
 type MyPageScreenNavigationProps = StackNavigationProp<
     HomeStackParamList,

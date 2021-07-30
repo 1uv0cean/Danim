@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -12,6 +11,8 @@ import MyPage from '../views/Mypage';
 import EditProfile from '../views/EditProfile';
 import EditRegistration from '../views/EditRegistration';
 import WriteReview from '../views/WriteReview';
+import ReservationList from '../views/ReservationList';
+import Favorites from '../views/Favorites';
 
 export enum HomeScreens {
   Login = 'Login',
@@ -22,7 +23,7 @@ export enum HomeScreens {
   EditProfile = 'EditProfile',
   EditRegistration = 'EditRegistration',
   WriteReview = 'WriteReview',
-  TabNavigator='TabNavigator',
+  TabNavigator = 'TabNavigator',
 }
 
 export type HomeStackParamList = {
@@ -61,8 +62,8 @@ const TabNavigator:React.FunctionComponent = () => {
         }
       })}>
       <Tab.Screen name="현재위치" component={Main} />
-      <Tab.Screen name="예약내역" component={Main} />
-      <Tab.Screen name="즐겨찾기" component={Main} />
+      <Tab.Screen name="예약내역" component={ReservationList} />
+      <Tab.Screen name="즐겨찾기" component={Favorites} />
       <Tab.Screen name="내정보" component={MyPage} />
     </Tab.Navigator>
   );
