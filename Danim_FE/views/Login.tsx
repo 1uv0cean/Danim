@@ -7,6 +7,7 @@ import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {useState} from 'react';
 import {Alert} from 'react-native';
 import axios from 'axios';
+import {funcLogin} from '../function/funcLogin';
 
 type LoginScreenNavigationProps = StackNavigationProp<
   HomeStackParamList, // navigators/HomeStackNavigators/index.tsx 에서 지정했던 HomeStackParamList
@@ -68,16 +69,44 @@ const ServerButton = styled.Button`
   align-items: center;
 `;
 
+//sm
+//WriteReview 이동 버튼 
+const SMButton = styled.Button`
+   justify-content: center;
+   align-items: center;
+   `;
+
 const Login: React.FunctionComponent<LoginScreenProps> = props => {
   const {navigation} = props;
-  const initialSymbol: string = 'Danim';
-  const [symbol, setSymbol] = useState<string>(initialSymbol);
+  const [userPhone, setUserPhone] = useState<string>('');
+
+  // author : 차민재
+  // userphone 입력 시 값 바인딩
+  const setterUserPhone = (value: string) => {
+    setUserPhone(value);
+  };
+
+  // doLogin
+  const doLogin = async () => {
+    try {
+      let getLoginResult = await funcLogin({userPhone});
+      if (getLoginResult) {
+        navigation.navigate(HomeScreens.Main);
+      } else {
+        Alert.alert('정보를 확인해주세요.');
+      }
+    } catch (e) {
+      Alert.alert('오류 발생');
+    }
+  };
+
   return (
     <Container>
-      <PhoneInput />
+      <PhoneInput setterUserPhone={setterUserPhone} />
       <EmptyView />
       <LoginButton
-        onPress={() => navigation.navigate(HomeScreens.Main, {symbol})}
+        // onPress={() => navigation.navigate(HomeScreens.Main, {symbol})}
+        onPress={doLogin}
         color="#2C3E50"
         title="로그인"
       />
@@ -88,6 +117,11 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
         title="회원가입"
       />
       <EmptyView />
+      <SMButton
+        onPress={() => navigation.navigate(HomeScreens.WriteReview)}
+        color="#2C3E50"
+        title="WriteReview"
+      />
       <CheckBoxView>
         <LoginCheckBox />
         <MainText>자동 로그인</MainText>

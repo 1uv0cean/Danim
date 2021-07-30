@@ -3,6 +3,8 @@ node_modules
 #
 .DS_Store
 
+server/routes/db
+
 # Xcode
 #
 build/
@@ -58,3 +60,10 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+
+# etc
+
+db.js
+.env.dev
+.env

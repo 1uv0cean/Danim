@@ -5,12 +5,12 @@ const SearchBar = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
 
   //쿼리문 입력해주세여
-  //const onChangeSearch = query => setSearchQuery(query);
-
+  const onChangeSearch = (query: React.SetStateAction<string>) => setSearchQuery(query);
+  
   return (
     <Searchbar
         placeholder="Search"
-        //onChangeText={onChangeSearch}
+        onChangeText={onChangeSearch}
         value={searchQuery}
     />
   );
