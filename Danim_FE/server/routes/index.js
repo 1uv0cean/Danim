@@ -66,7 +66,6 @@ router.post('/api/post/sms', (req, res) => {
   const userPhone = req.body.userPhone;
 
   const certiNumber = Math.floor(Math.random() * 100000) + 10000;
-
   var resultCode = 404;
 
   const date = Date.now().toString();
@@ -149,5 +148,4 @@ router.post('/api/chkDuplicate', (req, res) => {
     },
   );
 });
-
 module.exports = router;

@@ -11,6 +11,7 @@ export function funcPostSMS({userPhone}) {
     });
   }
 
+
   const result = chkPostSMS().then(response => {
     console.log(response);
     if (response.code === 200) {
@@ -19,6 +20,7 @@ export function funcPostSMS({userPhone}) {
       return false;
     }
   });
+
 
   return result;
 }

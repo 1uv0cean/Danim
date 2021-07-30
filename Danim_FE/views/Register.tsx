@@ -133,6 +133,15 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
     }
   };
 
+  const doSMS = async () => {
+    try {
+      let getRegisterResult = await funcPostSMS({userPhone});
+      console.log('GETREGISTERRESULT : ', getRegisterResult);
+    } catch (e) {
+      Alert.alert('오류 발생');
+    }
+  };
+
   return (
     <Container>
       <Text>이름</Text>
