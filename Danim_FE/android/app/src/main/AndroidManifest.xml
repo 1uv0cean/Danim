@@ -18,7 +18,7 @@
       android:theme="@style/AppTheme">
       <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value= "${MAPS_API_KEY}" />
+        android:value= "AIzaSyCmjqHcZK31X7wH_XbK_PmHEMG9nSIntks" />
 
       <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
