@@ -28,7 +28,6 @@ router.get('/api', (req, res) => {
 });
 
 router.post('/api/register', (req, res) => {
-  console.log('REQ BODY', req.body);
   const userName = req.body.userName;
   const userPhone = req.body.userPhone;
   db.query(
@@ -65,6 +64,8 @@ router.post('/api/login', (req, res) => {
 
 router.post('/api/post/sms', (req, res) => {
   const userPhone = req.body.userPhone;
+
+  const certiNumber = Math.floor(Math.random() * 100000) + 10000;
 
   var resultCode = 404;
 
@@ -106,7 +107,7 @@ router.post('/api/post/sms', (req, res) => {
         type: 'SMS',
         countryCode: '82',
         from: process.env.PHONE_NUM,
-        content: `WEIVER 인증번호 ${userPhone} ${process.env.PHONE_NUM} 입니다.`,
+        content: `[DANIM] 회원가입 인증번호 [${certiNumber}] 입니다.`,
         messages: [
           {
             to: `${userPhone}`,
@@ -118,15 +119,35 @@ router.post('/api/post/sms', (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        resultCode = 200;
         console.log(html);
+        console.log('CRTI COUNT : ', certiNumber);
       }
     },
   );
 
   res.json({
-    code: resultCode,
+    code: 200,
+    certiNumber: certiNumber,
   });
+});
+
+router.post('/api/chkDuplicate', (req, res) => {
+  const userPhone = req.body.userPhone;
+  db.query(
+    'SELECT COUNT(*) FROM user WHERE userPhone = ?',
+    [userPhone],
+    (err, result) => {
+      if (!err) {
+        if (result[0]['COUNT(*)'] < 1) {
+          res.send({result: 'success'});
+        } else {
+          res.send({result: 'failed'});
+        }
+      } else {
+        res.send({result: 'failed'});
+      }
+    },
+  );
 });
 
 module.exports = router;
