@@ -80,7 +80,7 @@ const MyPage: React.FunctionComponent<MyPageScreenProps> = (props) => {
             </View>
             <View style={styles.disabilityView}>
                 <Text style={styles.subjectText}>장애인등록증수정</Text>
-                <TouchableOpacity onPress={() => navigation.navigate(HomeScreens.Login)} >
+                <TouchableOpacity onPress={() => navigation.navigate(HomeScreens.EditRegistration)} >
                     <Image 
                         style={styles.allowsImage} source={require('../img/arrows.png')}
                     />

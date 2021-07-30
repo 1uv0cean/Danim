@@ -6,14 +6,16 @@ import Register from '../views/Register';
 import RegisterWait from '../views/RegisterWait';
 import MyPage from '../views/Mypage';
 import EditProfile from '../views/EditProfile';
+import EditRegistration from '../views/EditRegistration';
 
 export enum HomeScreens {
   Login = 'Login',
   Main = 'Main',
   Register = 'Register',
   RegisterWait = 'RegisterWait',
-  MyPage = "MyPage",
-  EditProfile = "EditProfile"
+  MyPage = 'MyPage',
+  EditProfile = 'EditProfile',
+  EditRegistration = 'EditRegistration',
 }
 
 export type HomeStackParamList = {
@@ -23,6 +25,7 @@ export type HomeStackParamList = {
   RegisterWait: undefined;
   MyPage: undefined;
   EditProfile: undefined;
+  EditRegistration: undefined;
 };
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
@@ -38,6 +41,7 @@ const HomeStackNavigator: React.FunctionComponent = () => {
       />
        <HomeStack.Screen name={HomeScreens.MyPage} component={MyPage} />
        <HomeStack.Screen name={HomeScreens.EditProfile} component={EditProfile} />
+       <HomeStack.Screen name={HomeScreens.EditRegistration} component={EditRegistration} />
     </HomeStack.Navigator>
   );
 };
