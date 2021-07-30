@@ -7,6 +7,7 @@ import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {funcRegister} from '../function/funcRegister';
 import styled from 'styled-components/native';
+import {funcPostSMS} from '../function/funcSendMessage';
 
 const EmptyView = styled.View`
   flex: 0.05;
@@ -62,6 +63,15 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
     }
   };
 
+  const doSMS = async () => {
+    try {
+      let getRegisterResult = await funcPostSMS({userPhone});
+      console.log('GETREGISTERRESULT : ', getRegisterResult);
+    } catch (e) {
+      Alert.alert('오류 발생');
+    }
+  };
+
   return (
     <Container>
       <Text>이름</Text>
@@ -76,11 +86,7 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
         title="회원정보 확인"
       />
       <EmptyView />
-      <Button
-        onPress={() => Alert.alert('인증번호 전송', '얍!')}
-        color="#2C3E50"
-        title="인증번호 전송"
-      />
+      <Button onPress={doSMS} color="#2C3E50" title="인증번호 전송" />
       <EmptyView />
       <Text>인증번호</Text>
       <CertificationInput />
