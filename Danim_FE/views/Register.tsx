@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Text, Button, Alert} from 'react-native';
+import React, {Component, useState} from 'react';
+import {Text, Button, Alert, Image, Platform, ImageBackground, View} from 'react-native';
 import CertificationInput from '../components/register/CertificationInput';
 import NameInput from '../components/register/NameInput';
 import PhoneInput from '../components/register/PhoneInput';
@@ -8,6 +8,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {funcRegister} from '../function/funcRegister';
 import styled from 'styled-components/native';
 import ImagePicker from 'react-native-image-crop-picker';
+//import ImagePicker from 'react-native-image-picker';
+//import { launchImageLibrary } from 'react-native-image-picker';
 
 const EmptyView = styled.View`
   flex: 0.05;
@@ -62,6 +64,8 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       Alert.alert('오류 발생');
     }
   };
+  
+  const [imgPath, setImgPath] = useState('https://api.adorable.io/avatars/80/abott@adorable.png');
 
   return (
     <Container>
@@ -96,26 +100,35 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       <EmptyView />
       <EmptyView />
       <EmptyView />
-      <Text> 사진 들어갈 공간~~</Text>
+      <View
+        style={{alignItems: 'center'}}>
+        <ImageBackground
+          source={{uri:imgPath}}
+          style={{width: 200, height: 100, alignItems: 'center'}}
+          imageStyle={{borderRadius: 10}} 
+        />
+      </View>
       <EmptyView />
       <EmptyView />
       <EmptyView />
       <EmptyView />
       <Button
         onPress={() => 
-          ImagePicker.openPicker({
-          path: 'my-file-path.jpg',
-          width: 300,
-          height: 400,
-          cropping: true
-        }).then(image => {
-          setUri(image.path);
-          console.log(image);
-          let source = {uri: image.path};
-        })}
+          {
+            console.log('사진 선택하기')
+            ImagePicker.openPicker({
+              path: 'my-file-path.jpg',
+              width: 400,
+              height: 300,
+              cropping: true
+            }).then(image => {
+              setImgPath(image.path);
+              console.log("사진!!!!: " + imgPath);              
+            });
+          }
+        }
         color="#2C3E50"
         title="첨부"
-
       />
       <Text>관리자가 회원가입을 승인할 때까지 앱 사용이 제한됩니다.</Text>
       <EmptyView />

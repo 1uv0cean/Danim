@@ -24,4 +24,5 @@ export function funcRegister({userName, userPhone}) {
   });
 
   return user;
+  
 }
