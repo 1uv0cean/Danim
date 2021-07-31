@@ -12,7 +12,7 @@ import EditProfile from '../views/EditProfile';
 import EditRegistration from '../views/EditRegistration';
 import WriteReview from '../views/WriteReview';
 import ReservationList from '../views/ReservationList';
-import Favorites from '../views/Favorites';
+import Favorites from '../views/FavoritesMain';
 
 export enum HomeScreens {
   Login = 'Login',
