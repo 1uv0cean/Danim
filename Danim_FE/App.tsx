@@ -1,7 +1,7 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import HomeStackNavigatoer from './navigators/index';
-import {NavigationContainer} from '@react-navigation/native';
+import Navigator from './navigators/index';
 
 interface Props {}
 
@@ -12,9 +12,7 @@ const App = ({}: Props) => {
     }, 300);
   }, []);
   return (
-    <NavigationContainer>
-      <HomeStackNavigatoer />
-    </NavigationContainer>
+    <Navigator />
   );
 };
 

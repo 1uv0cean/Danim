@@ -8,13 +8,12 @@ const TextInput = styled.TextInput`
     border-width: 1px;
     border-color: #a5a5a5;
 `;
+const RegistraionInput = () => {
+    return (
+        <TextInput
+            keyboardType="numeric"
+        />
+    );
+}
 
-const NumInput  = () => {
-  return (
-    <TextInput
-      keyboardType="numeric"
-    />
-  );
-};
-
-export default NumInput;
+export default RegistraionInput;

@@ -9,7 +9,7 @@ import {funcGetBusstop} from '../../function/funcGetBusstop';
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    height: 615,
+    height: 625,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
