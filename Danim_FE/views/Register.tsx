@@ -1,14 +1,18 @@
 import React, {useState} from 'react';
-import {Text, Button, Alert} from 'react-native';
-import CertificationInput from '../components/register/CertificationInput';
+import {Text, Button, Alert, ImageBackground, View} from 'react-native';
 import NameInput from '../components/register/NameInput';
 import PhoneInput from '../components/register/PhoneInput';
 import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {funcRegister} from '../function/funcRegister';
 import styled from 'styled-components/native';
+import ImagePicker from 'react-native-image-crop-picker';
+
+//import ImagePicker from 'react-native-image-picker';
+//import * as ImagePicker from 'react-native-image-picker';
 import {funcPostSMS} from '../function/funcSendMessage';
 import {funcCheckDuplicate} from '../function/funcCheckDuplicate';
+import CertificationInput from '../components/register/CertificationInput';
 
 const EmptyView = styled.View`
   flex: 0.05;
@@ -32,6 +36,10 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
   const {navigation} = props;
   const [userName, setUserName] = useState<string>('');
   const [userPhone, setUserPhone] = useState<string>('');
+
+  //인증서
+  const [userCertify, setUserCertify] = useState<string>('');
+
   // 중복 여부 체크 - 초기 값은 중복 상태로 둔다.
   const [isDuplicate, setIsDuplicate] = useState<string>('O');
   // 인증번호
@@ -109,7 +117,7 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
   const doRegister = async () => {
     try {
       // 데이터 검증 단계
-      if (userName !== '' && userPhone !== '') {
+      if (userName !== '' && userPhone !== '' && userCertify !== '') {
         if (isDuplicate === 'O') {
           // 중복 확인
           Alert.alert('중복 확인이 필요합니다.');
@@ -117,7 +125,7 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
           // 인증번호 확인
           Alert.alert('인증번호 확인이 필요합니다.');
         } else {
-          let getRegisterResult = await funcRegister({userName, userPhone});
+          let getRegisterResult = await funcRegister({userName, userPhone, userCertify});
           if (getRegisterResult) {
             Alert.alert('회원가입 성공');
             navigation.navigate(HomeScreens.RegisterWait);
@@ -154,20 +162,76 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       <Button onPress={doCheckCertify} color="#2C3E50" title="확인" />
       <EmptyView />
       <Text>장애인 증명서</Text>
+      <Text>userCertify: {userCertify}</Text>
+      <View
+        style={{alignItems: 'center'}}>
+        <ImageBackground
+          source={{uri:userCertify}}
+          style={{width: 200, height: 100, alignItems: 'center'}}
+          imageStyle={{borderRadius: 10}} 
+        />
+      </View>
       <EmptyView />
       <EmptyView />
       <EmptyView />
       <EmptyView />
-      <Text> 사진 들어갈 공간~~</Text>
-      <EmptyView />
-      <EmptyView />
-      <EmptyView />
-      <EmptyView />
+      {/* <Button
+        onPress={() => 
+          {
+            console.log('사진 선택하기')
+            ImagePicker.openPicker({
+              path: 'my-file-path.jpg',
+              width: 400,
+              height: 300,
+              cropping: true
+            }).then(image => {
+              setImgPath(image.path);
+              console.log("사진!!!!: " + imgPath);              
+            });
+          }
+        }
+        color="#2C3E50"
+        title="첨부"
+      /> */}
       <Button
-        onPress={() => Alert.alert('확인', '고양이!')}
+        onPress={() => 
+          {
+            console.log('사진 선택하기')
+            ImagePicker.openPicker({
+              path: 'my-file-path.jpg',
+              width: 400,
+              height: 300,
+              cropping: true
+            }).then(async image => {
+              setUserCertify(image.path);
+              console.log("사진!!!!: " + userCertify);    
+              
+              const data = new FormData();
+              data.append('name', 'imgCertification');
+              data.append('fileData', {
+                uri : userCertify,
+                name: image
+              });
+              
+              const config = {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'multipart/form-data',
+                },
+                body: data,
+              };
+              fetch("http://localhost:5000/" + "api/upload", config)
+              .then((checkStatusAndGetJSONResponse)=>{       
+                console.log(checkStatusAndGetJSONResponse);
+              }).catch((err)=>{console.log(err)});
+            });
+          }
+        }
         color="#2C3E50"
         title="첨부"
       />
+
       <Text>관리자가 회원가입을 승인할 때까지 앱 사용이 제한됩니다.</Text>
       <EmptyView />
       <EmptyView />
