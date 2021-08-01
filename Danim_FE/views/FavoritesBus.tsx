@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {View, Text} from 'react-native';
 
-export default class Bus extends Component {
-  render() {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Bus</Text>
-      </View>
-    );
-  }
+const Bus = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Bus</Text>
+    </View>
+  );
 }
+
+export default Bus
