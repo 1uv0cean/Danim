@@ -16,6 +16,7 @@ type LoginScreenNavigationProps = StackNavigationProp<
 
 interface LoginScreenProps {
   navigation: LoginScreenNavigationProps; // 네비게이션 속서에 대한 타입으로 방금 지정해주었던 MainScreenNavigationProps 을 지정
+  userPhone: any;
 }
 
 // 2021. 07. 28.

@@ -27,23 +27,23 @@ export enum HomeScreens {
 }
 
 export type HomeStackParamList = {
-  Login: undefined;
-  Main: undefined;
-  Register: undefined;
-  RegisterWait: undefined;
-  MyPage: undefined;
-  EditProfile: undefined;
-  EditRegistration: undefined;
-  WriteReview: undefined;
-  TabNavigator: undefined;
-  names: undefined;
+  Login: any;
+  Main: any;
+  Register: any;
+  RegisterWait: any;
+  MyPage: any;
+  EditProfile: any;
+  EditRegistration: any;
+  WriteReview: any;
+  TabNavigator: any;
+  names: any;
 };
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator: React.FunctionComponent = ({route, navigation}: any) => {
+const TabNavigator: React.FunctionComponent = ({route}: any) => {
   // 로그인 시 사용한 휴대전화 번호 가져오기
   const {userPhone} = route.params;
   return (
