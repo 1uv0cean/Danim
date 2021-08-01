@@ -3,6 +3,9 @@ node_modules
 #
 .DS_Store
 
+#imgCertification
+/imgCertification
+
 server/routes/db
 
 # Xcode

@@ -1,6 +1,5 @@
-import React, {Component, useState} from 'react';
-import {Text, Button, Alert, Image, Platform, ImageBackground, View} from 'react-native';
-import CertificationInput from '../components/register/CertificationInput';
+import React, {useState} from 'react';
+import {Text, Button, Alert, ImageBackground, View} from 'react-native';
 import NameInput from '../components/register/NameInput';
 import PhoneInput from '../components/register/PhoneInput';
 import {HomeScreens, HomeStackParamList} from '../navigators/index';
@@ -8,8 +7,9 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {funcRegister} from '../function/funcRegister';
 import styled from 'styled-components/native';
 import ImagePicker from 'react-native-image-crop-picker';
+
 //import ImagePicker from 'react-native-image-picker';
-//import { launchImageLibrary } from 'react-native-image-picker';
+//import * as ImagePicker from 'react-native-image-picker';
 
 const EmptyView = styled.View`
   flex: 0.05;
@@ -33,6 +33,7 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
   const {navigation} = props;
   const [userName, setUserName] = useState<string>('');
   const [userPhone, setUserPhone] = useState<string>('');
+  const [userCertify, setUserCertify] = useState<string>('');
 
   // author : 차민재
   // username 입력 시 값 바인딩
@@ -49,8 +50,8 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
   const doRegister = async () => {
     try {
       // 데이터 검증 단계
-      if (userName !== '' && userPhone !== '') {
-        let getRegisterResult = await funcRegister({userName, userPhone});
+      if (userName !== '' && userPhone !== '' && userCertify != '') {
+        let getRegisterResult = await funcRegister({userName, userPhone, userCertify});
         if (getRegisterResult) {
           Alert.alert('회원가입 성공');
           navigation.navigate(HomeScreens.RegisterWait);
@@ -64,8 +65,6 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       Alert.alert('오류 발생');
     }
   };
-  
-  const [imgPath, setImgPath] = useState('https://api.adorable.io/avatars/80/abott@adorable.png');
 
   return (
     <Container>
@@ -88,7 +87,6 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       />
       <EmptyView />
       <Text>인증번호</Text>
-      <CertificationInput />
       <Button
         onPress={() => Alert.alert('확인', '고양이!')}
         color="#2C3E50"
@@ -96,14 +94,11 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       />
       <EmptyView />
       <Text>장애인 증명서</Text>
-      <EmptyView />
-      <EmptyView />
-      <EmptyView />
-      <EmptyView />
+      <Text>userCertify: {userCertify}</Text>
       <View
         style={{alignItems: 'center'}}>
         <ImageBackground
-          source={{uri:imgPath}}
+          source={{uri:userCertify}}
           style={{width: 200, height: 100, alignItems: 'center'}}
           imageStyle={{borderRadius: 10}} 
         />
@@ -112,7 +107,7 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       <EmptyView />
       <EmptyView />
       <EmptyView />
-      <Button
+      {/* <Button
         onPress={() => 
           {
             console.log('사진 선택하기')
@@ -129,7 +124,29 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
         }
         color="#2C3E50"
         title="첨부"
+      /> */}
+      <Button
+        onPress={() => 
+          {
+            console.log('사진 선택하기')
+            ImagePicker.openPicker({
+              path: 'my-file-path.jpg',
+              width: 400,
+              height: 300,
+              cropping: true
+            }).then(async image => {
+              setUserCertify(image.path);
+              console.log("사진!!!!: " + userCertify);    
+              
+              const formData = new FormData();
+              formData.append('image', userCertify);
+            });
+          }
+        }
+        color="#2C3E50"
+        title="첨부"
       />
+
       <Text>관리자가 회원가입을 승인할 때까지 앱 사용이 제한됩니다.</Text>
       <EmptyView />
       <EmptyView />
