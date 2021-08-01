@@ -42,7 +42,7 @@ function GoogleMap() {
           latitude,
           longitude,
         });
-        doGetBusstop();
+        // doGetBusstop();
       },
       error => {
         console.log(error.code, error.message);
@@ -58,20 +58,20 @@ function GoogleMap() {
           provider={PROVIDER_GOOGLE} // remove if not using Google Maps
           style={styles.map}
           initialRegion={{
-            // latitude: location.latitude,
-            // longitude: location.longitude,
+            latitude: location.latitude,
+            longitude: location.longitude,
             // 에뮬레이터 GPS 기능 부재로 위의 코드로 수정 해야 합니다.
-            latitude: 37.448,
-            longitude: 126.6575,
+            // latitude: 37.448,
+            // longitude: 126.6575,
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
           }}>
           <Marker
             coordinate={{
-              // latitude: location.latitude,
-              // longitude: location.longitude,
-              latitude: 37.448,
-              longitude: 126.6575,
+              latitude: location.latitude,
+              longitude: location.longitude,
+              // latitude: 37.448,
+              // longitude: 126.6575,
             }}
           />
         </MapView>
