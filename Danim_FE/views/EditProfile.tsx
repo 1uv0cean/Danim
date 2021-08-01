@@ -82,11 +82,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const EditProfile: React.FunctionComponent<EditProfileScreenProps> = () => {
+const EditProfile: React.FunctionComponent<EditProfileScreenProps> = ({
+  route,
+}: any) => {
+  const {userPhone} = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.idView}>
-        <Text style={styles.idText}>DINO</Text>
+        <Text style={styles.idText}>{userPhone}</Text>
         <Text style={styles.hiText}>안녕하세요!</Text>
       </View>
       <View style={styles.phoneNumChangeView}>
