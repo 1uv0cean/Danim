@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {createStackNavigator} from '@react-navigation/stack';
 import Login from '../views/Login';
@@ -36,19 +36,21 @@ export type HomeStackParamList = {
   EditRegistration: undefined;
   WriteReview: undefined;
   TabNavigator: undefined;
+  names: undefined;
 };
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
 
 const Tab = createBottomTabNavigator();
 
-
-const TabNavigator:React.FunctionComponent = () => {
+const TabNavigator: React.FunctionComponent = ({route, navigation}: any) => {
+  // 로그인 시 사용한 휴대전화 번호 가져오기
+  const {userPhone} = route.params;
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused }) => {
-          let iconName = "";
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused}) => {
+          let iconName = '';
           if (route.name === '현재위치') {
             iconName = focused ? 'map' : 'map-outline';
           } else if (route.name === '예약내역') {
@@ -58,33 +60,60 @@ const TabNavigator:React.FunctionComponent = () => {
           } else if (route.name === '내정보') {
             iconName = focused ? 'people' : 'people-outline';
           }
-          return <Ionicons name={iconName} size={25} color={"#2C3E50"} />;
-        }
+          return <Ionicons name={iconName} size={25} color={'#2C3E50'} />;
+        },
       })}>
       <Tab.Screen name="현재위치" component={Main} />
-      <Tab.Screen name="예약내역" component={ReservationList} />
-      <Tab.Screen name="즐겨찾기" component={Favorites} />
-      <Tab.Screen name="내정보" component={MyPage} />
+      <Tab.Screen
+        name="예약내역"
+        component={ReservationList}
+        initialParams={{userPhone: userPhone}}
+      />
+      <Tab.Screen
+        name="즐겨찾기"
+        component={Favorites}
+        initialParams={{userPhone: userPhone}}
+      />
+      <Tab.Screen
+        name="내정보"
+        component={MyPage}
+        initialParams={{userPhone: userPhone}}
+      />
     </Tab.Navigator>
   );
-}
+};
 
 const HomeStackNavigator: React.FunctionComponent = () => {
   return (
     <NavigationContainer>
       <HomeStack.Navigator>
         <HomeStack.Screen name={HomeScreens.Login} component={Login} />
-        <HomeStack.Screen name={HomeScreens.TabNavigator} component={TabNavigator} />
+        <HomeStack.Screen
+          name={HomeScreens.TabNavigator}
+          component={TabNavigator}
+        />
         <HomeStack.Screen name={HomeScreens.Main} component={Main} />
         <HomeStack.Screen name={HomeScreens.Register} component={Register} />
-        <HomeStack.Screen name={HomeScreens.RegisterWait} component={RegisterWait} />
+        <HomeStack.Screen
+          name={HomeScreens.RegisterWait}
+          component={RegisterWait}
+        />
         <HomeStack.Screen name={HomeScreens.MyPage} component={MyPage} />
-        <HomeStack.Screen name={HomeScreens.EditProfile} component={EditProfile} />
-        <HomeStack.Screen name={HomeScreens.EditRegistration} component={EditRegistration} />
-        <HomeStack.Screen name={HomeScreens.WriteReview} component={WriteReview} />
+        <HomeStack.Screen
+          name={HomeScreens.EditProfile}
+          component={EditProfile}
+        />
+        <HomeStack.Screen
+          name={HomeScreens.EditRegistration}
+          component={EditRegistration}
+        />
+        <HomeStack.Screen
+          name={HomeScreens.WriteReview}
+          component={WriteReview}
+        />
       </HomeStack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default HomeStackNavigator
+export default HomeStackNavigator;

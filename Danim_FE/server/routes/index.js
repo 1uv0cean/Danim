@@ -51,7 +51,7 @@ router.post('/api/login', (req, res) => {
     (err, result) => {
       if (!err) {
         if (result[0]['COUNT(*)'] >= 1) {
-          res.send({result: 'success'});
+          res.send({result: 'success', userPhone: userPhone});
         } else {
           res.send({result: 'failed'});
         }
