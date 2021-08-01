@@ -1,8 +1,8 @@
 import React from 'react';
 import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {StackNavigationProp} from '@react-navigation/stack';
-import GoogleMap from '../components/Main/GoogleMap';
-import SearchBar from '../components/Main/SearchBar';
+import GoogleMap from '../components/main/GoogleMap';
+import SearchBar from '../components/main/SearchBar';
 import {View} from 'react-native';
 
 type MainScreenNavigationProps = StackNavigationProp<
@@ -22,12 +22,12 @@ interface MainScreenProps {
 const Main: React.FunctionComponent<MainScreenProps> = () => {
   return (
     <>
-    <View>
-      <SearchBar />
-    </View>
-    <View>
-      <GoogleMap />
-    </View>
+      <View>
+        <SearchBar />
+      </View>
+      <View>
+        <GoogleMap />
+      </View>
     </>
   );
 };

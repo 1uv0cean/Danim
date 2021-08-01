@@ -13,7 +13,7 @@ export function funcLogin({userPhone}) {
 
   const user = chkSignIn().then(response => {
     if (response.result === 'success') {
-      return true;
+      return response.userPhone;
     } else {
       return false;
     }

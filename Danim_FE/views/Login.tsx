@@ -16,6 +16,7 @@ type LoginScreenNavigationProps = StackNavigationProp<
 
 interface LoginScreenProps {
   navigation: LoginScreenNavigationProps; // 네비게이션 속서에 대한 타입으로 방금 지정해주었던 MainScreenNavigationProps 을 지정
+  userPhone: any;
 }
 
 // 2021. 07. 28.
@@ -70,11 +71,11 @@ const ServerButton = styled.Button`
 `;
 
 //sm
-//mypage 이동 버튼 
+//WriteReview 이동 버튼
 const SMButton = styled.Button`
-   justify-content: center;
-   align-items: center;
-   `;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Login: React.FunctionComponent<LoginScreenProps> = props => {
   const {navigation} = props;
@@ -89,9 +90,12 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
   // doLogin
   const doLogin = async () => {
     try {
+      // return value : user Phone number
       let getLoginResult = await funcLogin({userPhone});
       if (getLoginResult) {
-        navigation.navigate(HomeScreens.Main);
+        navigation.navigate(HomeScreens.TabNavigator, {
+          userPhone: userPhone,
+        });
       } else {
         Alert.alert('정보를 확인해주세요.');
       }
@@ -118,9 +122,9 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
       />
       <EmptyView />
       <SMButton
-        onPress={() => navigation.navigate(HomeScreens.MyPage)}
+        onPress={() => navigation.navigate(HomeScreens.WriteReview)}
         color="#2C3E50"
-        title="Mypage"
+        title="WriteReview"
       />
       <CheckBoxView>
         <LoginCheckBox />

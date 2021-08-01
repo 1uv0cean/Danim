@@ -68,3 +68,5 @@ buck-out/
 # etc
 
 db.js
+.env.dev
+.env
