@@ -1,8 +1,8 @@
 import React from 'react';
 import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {StackNavigationProp} from '@react-navigation/stack';
-import GoogleMap from '../components/main/GoogleMap';
-import SearchBar from '../components/main/SearchBar';
+import GoogleMap from '../components/main1/GoogleMap';
+import SearchBar from '../components/main1/SearchBar';
 import {View} from 'react-native';
 
 type MainScreenNavigationProps = StackNavigationProp<

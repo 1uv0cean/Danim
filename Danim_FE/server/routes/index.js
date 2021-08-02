@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../config/db');
 const dotenv = require('dotenv');
 const path = require('path');
-const upload = multer({dest: 'imgCertification/'});
+//const upload = multer({dest: 'imgCertification/'});
 
 var fs = require('fs');
 var multer  = require('multer');
@@ -50,6 +50,7 @@ router.post('/api/register', (req, res) => {
 });
 
 //이미지 업로드
+/** 
 app.post('/upload',upload.single('fileData'), (req, res,next) => {
   console.log(req.file);//this will be automatically set by multer
   console.log(req.body);
@@ -63,6 +64,7 @@ app.post('/upload',upload.single('fileData'), (req, res,next) => {
   }
  });
 });
+*/
 
 
 router.post('/api/login', (req, res) => {
