@@ -80,15 +80,25 @@ function GoogleMap() {
             }}
           />
           {nearStop !== undefined &&
-            nearStop.map((test: any) => (
-              <Marker
-                key={test.nodeno._text}
-                coordinate={{
-                  latitude: test.gpslati._text * 1,
-                  longitude: test.gpslong._text * 1,
-                }}
-              />
-            ))}
+            nearStop.map((test: any) =>
+              test?.nodeno?._text !== undefined ? (
+                <Marker
+                  key={test.nodeno._text}
+                  coordinate={{
+                    latitude: test.gpslati._text * 1,
+                    longitude: test.gpslong._text * 1,
+                  }}
+                />
+              ) : (
+                <Marker
+                  key={test.arsId._text}
+                  coordinate={{
+                    latitude: test.gpsY._text * 1,
+                    longitude: test.gpsX._text * 1,
+                  }}
+                />
+              ),
+            )}
         </MapView>
       )}
     </View>

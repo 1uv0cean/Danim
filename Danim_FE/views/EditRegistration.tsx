@@ -3,7 +3,7 @@ import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {Text, View, StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Button} from 'react-native-paper';
-import RegistrationInput from '../components/editRegistration/RegistrationInput';
+import RegistrationInput from '../components/editregistration/RegistrationInput';
 
 type EditRegistrationScreenNavigationProps = StackNavigationProp<
   HomeStackParamList,
