@@ -3,14 +3,10 @@ const router = express.Router();
 const db = require('../config/db');
 const dotenv = require('dotenv');
 const path = require('path');
-<<<<<<< HEAD
 const convert = require('xml-js');
-=======
 //const upload = multer({dest: 'imgCertification/'});
-
 var fs = require('fs');
-var multer  = require('multer');
->>>>>>> b87d61256ea4a31ebcf8456ff89d84e5da211a15
+var multer = require('multer');
 var request = require('request');
 
 //create signature2
@@ -38,7 +34,7 @@ router.get('/api', (req, res) => {
 router.post('/api/register', (req, res) => {
   const userName = req.body.userName;
   const userPhone = req.body.userPhone;
-  const userCertify = `/imgCertification/`+{userCertify}+`.jpg`; // image 경로 만들기
+  const userCertify = `/imgCertification/` + {userCertify} + `.jpg`; // image 경로 만들기
 
   db.query(
     'INSERT INTO user(userName, userPhone, userCertify) VALUES(?,?,?)',
@@ -69,7 +65,6 @@ app.post('/upload',upload.single('fileData'), (req, res,next) => {
  });
 });
 */
-
 
 router.post('/api/login', (req, res) => {
   const userPhone = req.body.userPhone;
