@@ -204,12 +204,51 @@ router.post('/api/busstop', (req, res) => {
       // console.log('Headers', JSON.stringify(response.headers));
       // console.log('Reponse received', body);
       var xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
-      const obj = JSON.parse(xmlToJson);
+      var obj = JSON.parse(xmlToJson);
       // console.log('XMLTOJSON : ', obj.response.body.items.item);
       if (obj.response.body.items.item) {
         res.send({result: 'success', body: obj.response.body.items.item});
       } else {
-        res.send({result: 'failed'});
+        console.log('ITEM NOT FOUND');
+        url = 'http://ws.bus.go.kr/api/rest/stationinfo/getStationByPos';
+        queryParams =
+          '?' +
+          encodeURIComponent('ServiceKey') +
+          `=${process.env.API_SERVICEKEY}`; /* Service Key*/
+        queryParams +=
+          '&' +
+          encodeURIComponent('tmX') +
+          '=' +
+          encodeURIComponent(String(longitude)); /* */
+        queryParams +=
+          '&' +
+          encodeURIComponent('tmY') +
+          '=' +
+          encodeURIComponent(String(latitude)); /* */
+        queryParams +=
+          '&' +
+          encodeURIComponent('radius') +
+          '=' +
+          encodeURIComponent('1000'); /* */
+
+        request(
+          {
+            url: url + queryParams,
+            method: 'GET',
+          },
+          function (error, response, body) {
+            //console.log('Status', response.statusCode);
+            //console.log('Headers', JSON.stringify(response.headers));
+
+            xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
+            obj = JSON.parse(xmlToJson);
+            // console.log('result : ', obj.ServiceResult.msgBody.itemList);
+            res.send({
+              result: 'failed',
+              body: obj.ServiceResult.msgBody.itemList,
+            });
+          },
+        );
       }
     },
   );
