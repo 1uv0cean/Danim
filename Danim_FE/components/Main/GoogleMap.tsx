@@ -25,14 +25,18 @@ interface ILocation {
 
 function GoogleMap() {
   const [location, setLocation] = useState<ILocation | undefined>(undefined);
+  const [nearStop, setNearStop] = useState<[]>([]);
 
-  const doGetBusstop = async () => {
+  const doGetBusstop = async ({latitude, longitude}: any) => {
     try {
-      let getResult = await funcGetBusstop();
+      let getResult = await funcGetBusstop({latitude, longitude});
+      setNearStop(getResult);
+      return getResult;
     } catch (e) {
       console.log(e);
     }
   };
+
   useEffect(() => {
     // 현재 위치 받아오기
     Geolocation.getCurrentPosition(
@@ -42,13 +46,14 @@ function GoogleMap() {
           latitude,
           longitude,
         });
-        // doGetBusstop();
+        doGetBusstop({latitude, longitude});
       },
       error => {
         console.log(error.code, error.message);
       },
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -74,6 +79,16 @@ function GoogleMap() {
               // longitude: 126.6575,
             }}
           />
+          {nearStop !== undefined &&
+            nearStop.map((test: any) => (
+              <Marker
+                key={test.nodeno._text}
+                coordinate={{
+                  latitude: test.gpslati._text * 1,
+                  longitude: test.gpslong._text * 1,
+                }}
+              />
+            ))}
         </MapView>
       )}
     </View>
