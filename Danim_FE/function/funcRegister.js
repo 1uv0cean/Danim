@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function funcRegister({userName, userPhone}) {
+export function funcRegister({userName, userPhone, userCertify}) {
   // /api/register에 데이터 보내고 응답 받아오는 함수
   function chkSignUp() {
     return new Promise(function (resolve, reject) {
@@ -8,6 +8,7 @@ export function funcRegister({userName, userPhone}) {
         .post('http://10.0.2.2:5000/api/register', {
           userName: userName,
           userPhone: userPhone,
+          userCertify: userCertify
         })
         .then(response => resolve(response.data));
     });
@@ -24,4 +25,5 @@ export function funcRegister({userName, userPhone}) {
   });
 
   return user;
+  
 }
