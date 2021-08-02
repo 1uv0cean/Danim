@@ -3,8 +3,13 @@ import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {Text, View, StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Button} from 'react-native-paper';
+<<<<<<< HEAD
+import PhoneNumInput from '../components/EditProfile/PhoneNumInput';
+import NumInput from '../components/EditProfile/NumInput';
+=======
 import PhoneNumInput from '../components/editProfile/PhoneNumInput';
 import NumInput from '../components/editProfile/NumInput';
+>>>>>>> b87d61256ea4a31ebcf8456ff89d84e5da211a15
 
 type EditProfileScreenNavigationProps = StackNavigationProp<
   HomeStackParamList,

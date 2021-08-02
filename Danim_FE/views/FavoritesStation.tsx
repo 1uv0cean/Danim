@@ -7,6 +7,6 @@ const Station = () => {
       <Text>Bus</Text>
     </View>
   );
-}
+};
 
-export default Station
+export default Station;

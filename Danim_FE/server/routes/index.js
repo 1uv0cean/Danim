@@ -3,10 +3,14 @@ const router = express.Router();
 const db = require('../config/db');
 const dotenv = require('dotenv');
 const path = require('path');
+<<<<<<< HEAD
+const convert = require('xml-js');
+=======
 //const upload = multer({dest: 'imgCertification/'});
 
 var fs = require('fs');
 var multer  = require('multer');
+>>>>>>> b87d61256ea4a31ebcf8456ff89d84e5da211a15
 var request = require('request');
 
 //create signature2
@@ -173,23 +177,27 @@ router.post('/api/chkDuplicate', (req, res) => {
   );
 });
 
-router.get('/api/busstop', (req, res) => {
-  /* NodeJs 샘플 코드 */
+router.post('/api/busstop', (req, res) => {
+  console.log('REQBODY : ', req.body);
+  const latitude = req.body.latitude;
+  const longitude = req.body.longitude;
 
   var url =
     'http://openapi.tago.go.kr/openapi/service/BusSttnInfoInqireService/getCrdntPrxmtSttnList';
   var queryParams =
-    '?' + encodeURIComponent('ServiceKey') + '=서비스키'; /* Service Key*/
+    '?' +
+    encodeURIComponent('ServiceKey') +
+    `=${process.env.API_SERVICEKEY}`; /* Service Key*/
   queryParams +=
     '&' +
     encodeURIComponent('gpsLati') +
     '=' +
-    encodeURIComponent('36.3'); /* */
+    encodeURIComponent(String(latitude)); /* */
   queryParams +=
     '&' +
     encodeURIComponent('gpsLong') +
     '=' +
-    encodeURIComponent('127.3'); /* */
+    encodeURIComponent(String(longitude)); /* */
 
   request(
     {
@@ -197,9 +205,17 @@ router.get('/api/busstop', (req, res) => {
       method: 'GET',
     },
     function (error, response, body) {
-      console.log('Status', response.statusCode);
-      console.log('Headers', JSON.stringify(response.headers));
-      console.log('Reponse received', body);
+      // console.log('Status', response.statusCode);
+      // console.log('Headers', JSON.stringify(response.headers));
+      // console.log('Reponse received', body);
+      var xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
+      const obj = JSON.parse(xmlToJson);
+      // console.log('XMLTOJSON : ', obj.response.body.items.item);
+      if (obj.response.body.items.item) {
+        res.send({result: 'success', body: obj.response.body.items.item});
+      } else {
+        res.send({result: 'failed'});
+      }
     },
   );
 });
