@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {HomeScreens, HomeStackParamList} from '../navigators/index';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, ImageBackground} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Button} from 'react-native-paper';
-import RegistrationInput from '../components/editregistration/RegistrationInput';
+import ImagePicker from 'react-native-image-crop-picker';
+import RegistrationInput from '../components/EditRegistration/RegistrationInput';
 
 type EditRegistrationScreenNavigationProps = StackNavigationProp<
   HomeStackParamList,
@@ -89,6 +90,8 @@ const styles = StyleSheet.create({
 const EditRegistration: React.FunctionComponent<EditRegistrationScreenProps> =
   ({route}: any) => {
     const {userPhone} = route.params;
+    const [imgPath, setImgPath] = useState<string>('');
+    
     return (
       <View style={styles.container}>
         <View style={styles.idView}>
@@ -98,8 +101,30 @@ const EditRegistration: React.FunctionComponent<EditRegistrationScreenProps> =
         <View style={styles.registraionChangeView}>
           <Text style={styles.titleText}>장애인등록증 수정</Text>
           <Text style={styles.subtitleText}>바뀐 장애인등록증</Text>
-          <RegistrationInput />
-          <Button style={styles.attachmentButton}>
+          <View
+            style={{alignItems: 'center'}}>
+            <ImageBackground
+              source={{uri:imgPath}}
+              style={{width: 200, height: 150, alignItems: 'center'}}
+              imageStyle={{borderRadius: 10}} 
+            />
+          </View>
+          <Button
+            onPress={() => 
+              {
+                console.log('사진 선택하기')
+                ImagePicker.openPicker({
+                  path: 'my-file-path.jpg',
+                  width: 400,
+                  height: 300,
+                  cropping: true
+                }).then(image => {
+                  setImgPath(image.path);
+                  console.log("사진!!!!: " + image.path);
+                });
+              }
+            }
+          style={styles.attachmentButton}> 
             <Text style={styles.buttonText2}>첨부</Text>
           </Button>
           <Text style={styles.cautionText}>
@@ -109,9 +134,39 @@ const EditRegistration: React.FunctionComponent<EditRegistrationScreenProps> =
           </Text>
         </View>
         <View style={styles.buttonView}>
-          <Button style={styles.updateButton}>
-            <Text style={styles.buttonText}>수정</Text>
-          </Button>
+          <Button
+            onPress={() =>
+            {
+              const data = new FormData();
+
+              data.append('fileData', {
+                type: 'image/jpeg', 
+                uri: imgPath,
+                name: userPhone+'_imgCertification.jpg',
+                filename: userPhone+'_imgCertification.jpg'
+              });
+              
+              console.log("데이터 생성!!!!: " + data);
+              
+              const config = {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'multipart/form-data',
+                },
+                body: data,
+              };
+
+              //ex) "http://10.200.52.60:5000/api/upload"
+              fetch("http://ip주소!!!!!:5000/api/upload", config)
+              .then((checkStatusAndGetJSONResponse)=>{       
+                console.log(checkStatusAndGetJSONResponse);
+              }).catch((err)=>{console.log(err)});
+            }
+          }
+          style={styles.attachmentButton}> 
+          <Text style={styles.buttonText2}>수정</Text>
+        </Button>
         </View>
       </View>
     );
