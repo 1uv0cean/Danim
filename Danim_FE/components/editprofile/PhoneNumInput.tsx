@@ -9,8 +9,17 @@ const TextInput = styled.TextInput`
   border-color: #a5a5a5;
 `;
 
-const PhoneNumInput = () => {
-  return <TextInput keyboardType="numeric" />;
+interface Props {
+  setUserPhone: (value: string) => void;
+}
+
+const PhoneNumInput: React.FC<Props> = (props: Props) => {
+  return (
+    <TextInput
+      keyboardType="numeric"
+      onChangeText={value => props.setUserPhone(value)}
+    />
+  );
 };
 
 export default PhoneNumInput;

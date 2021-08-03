@@ -253,4 +253,20 @@ router.post('/api/busstop', (req, res) => {
     },
   );
 });
+
+router.post('/api/post/changePhone', (req, res) => {
+  const userPhone = req.body.userPhone;
+  const chngUserPhone = req.body.chngUserPhone;
+  db.query(
+    'UPDATE user SET userPhone = ? WHERE userPhone = ?',
+    [chngUserPhone, userPhone],
+    (err, result) => {
+      if (!err) {
+        res.send({result: '200'});
+      } else {
+        res.send({result: '404'});
+      }
+    },
+  );
+});
 module.exports = router;
