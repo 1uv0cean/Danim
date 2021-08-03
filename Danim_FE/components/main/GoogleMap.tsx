@@ -1,9 +1,9 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
-import {Marker} from 'react-native-maps';
+import {Marker, Callout} from 'react-native-maps';
 import {funcGetBusstop} from '../../function/funcGetBusstop';
 
 const styles = StyleSheet.create({
@@ -87,16 +87,42 @@ function GoogleMap() {
                   coordinate={{
                     latitude: test.gpslati._text * 1,
                     longitude: test.gpslong._text * 1,
-                  }}
-                />
+                  }}>
+                  <Callout tooltip>
+                    <View>
+                      <Text>
+                        {/* {marker.title}
+                        {'\n'}
+                        {marker.description} */}
+                        {test.nodeid._text}
+                        {'\n'}
+                        {test.nodenm._text}
+                        {'\n'}
+                        {test.nodeno._text}
+                      </Text>
+                    </View>
+                  </Callout>
+                </Marker>
               ) : (
                 <Marker
-                  key={test.arsId._text}
+                  key={test.stationId._text}
                   coordinate={{
                     latitude: test.gpsY._text * 1,
                     longitude: test.gpsX._text * 1,
-                  }}
-                />
+                  }}>
+                  <Callout tooltip>
+                    <View>
+                      <Text>
+                        {/* {marker.title}
+                    {'\n'}
+                    {marker.description} */}
+                        {test.stationId._text}
+                        {'\n'}
+                        {test.stationNm._text}
+                      </Text>
+                    </View>
+                  </Callout>
+                </Marker>
               ),
             )}
         </MapView>
