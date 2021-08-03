@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-export function funcPostSMS({userPhone}) {
+export function funcPostSMS({chngUserPhone}) {
   function chkPostSMS() {
     return new Promise(function (resolve, reject) {
       axios
         .post('http://10.0.2.2:5000/api/post/sms', {
-          userPhone: userPhone,
+          userPhone: chngUserPhone,
         })
         .then(response => resolve(response.data));
     });

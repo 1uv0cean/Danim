@@ -121,11 +121,15 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
         if (isDuplicate === 'O') {
           // 중복 확인
           Alert.alert('중복 확인이 필요합니다.');
-        // } else if (isCertified === 'X') {
-        //   // 인증번호 확인
-        //   Alert.alert('인증번호 확인이 필요합니다.');
+        } else if (isCertified === 'X') {
+          // 인증번호 확인
+          Alert.alert('인증번호 확인이 필요합니다.');
         } else {
-          let getRegisterResult = await funcRegister({userName, userPhone, userCertify});
+          let getRegisterResult = await funcRegister({
+            userName,
+            userPhone,
+            userCertify,
+          });
           if (getRegisterResult) {
             Alert.alert('회원가입 성공');
             navigation.navigate(HomeScreens.RegisterWait);
@@ -164,14 +168,11 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       <Button onPress={doCheckCertify} color="#2C3E50" title="확인" />
       <EmptyView />
       <Text>장애인 증명서</Text>
-      <Text>userCertify: {userCertify}</Text>
-      <Text>imgPath: {imgPath}</Text>
-      <View
-        style={{alignItems: 'center'}}>
+      <View style={{alignItems: 'center'}}>
         <ImageBackground
-          source={{uri:imgPath}}
-          style={{width: 200, height: 150, alignItems: 'center'}}
-          imageStyle={{borderRadius: 10}} 
+          source={{uri: userCertify}}
+          style={{width: 200, height: 100, alignItems: 'center'}}
+          imageStyle={{borderRadius: 10}}
         />
       </View>
       <EmptyView />
@@ -179,47 +180,18 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       <EmptyView />
       <EmptyView />
       <Button
-        onPress={() => 
-          {
-            console.log('사진 선택하기')
-            ImagePicker.openPicker({
-              path: 'my-file-path.jpg',
-              width: 400,
-              height: 300,
-              cropping: true
-            }).then(image => {
-              setUserCertify(userPhone+'_imgCertification.jpg');
-              setImgPath(image.path);
-              console.log("사진!!!!: " + image.path);    
-              
-              const data = new FormData();
-
-              data.append('fileData', {
-                type: 'image/jpeg', 
-                uri: image.path, 
-                name: userPhone+'_imgCertification.jpg',
-                filename: userPhone+'_imgCertification.jpg'
-              });
-              
-              console.log("데이터 생성!!!!: " + data);
-              
-              const config = {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'multipart/form-data',
-                },
-                body: data,
-              };
-
-              //ex) "http://10.200.52.60:5000/api/upload"
-              fetch("http://ip주소!!!!!!!:5000/api/upload", config)
-              .then((checkStatusAndGetJSONResponse)=>{       
-                console.log(checkStatusAndGetJSONResponse);
-              }).catch((err)=>{console.log(err)});
-            });
-          }
-        }
+        onPress={() => {
+          console.log('사진 선택하기');
+          ImagePicker.openPicker({
+            path: 'my-file-path.jpg',
+            width: 400,
+            height: 300,
+            cropping: true,
+          }).then(async image => {
+            setImgPath(image.path);
+            console.log('사진!!!!: ' + imgPath);
+          });
+        }}
         color="#2C3E50"
         title="첨부"
       />
@@ -228,7 +200,40 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       <EmptyView />
       <EmptyView />
       <EmptyView />
-      <Button onPress={doRegister} color="#2C3E50" title="완료" />
+      <Button onPress={() =>
+        {
+          setUserCertify(userPhone+'_imgCertification.jpg')
+
+          const data = new FormData();
+
+          data.append('name', 'imgCertification');
+          data.append('fileData', {
+            uri: imgPath,
+            type: 'image/jpeg', 
+            name: userPhone+'_imgCertification.jpg'
+          });
+
+          const config = {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'multipart/form-data',
+            },
+            body: data,
+          };
+
+          //ex) "http://10.200.52.60:5000/api/upload"
+          fetch('http://ip 주소!!!!:5000/api/upload', config)
+            .then(checkStatusAndGetJSONResponse => {
+              console.log(checkStatusAndGetJSONResponse);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+
+            doRegister();
+          }
+        } color="#2C3E50" title="완료" />
     </Container>
   );
 };

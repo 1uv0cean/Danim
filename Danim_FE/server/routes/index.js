@@ -4,9 +4,10 @@ const db = require('../config/db');
 const dotenv = require('dotenv');
 const path = require('path');
 const multer  = require('multer');
-//const upload = multer({dest: 'imgCertification/'});
+const convert = require('xml-js');
 
 var fs = require('fs');
+
 var request = require('request');
 
 //create signature2
@@ -83,7 +84,6 @@ router.post('/api/upload',imgUpload.single('fileData'), (req, res) => {
   }
  });
 });
-
 
 router.post('/api/login', (req, res) => {
   const userPhone = req.body.userPhone;
@@ -191,23 +191,27 @@ router.post('/api/chkDuplicate', (req, res) => {
   );
 });
 
-router.get('/api/busstop', (req, res) => {
-  /* NodeJs 샘플 코드 */
+router.post('/api/busstop', (req, res) => {
+  console.log('REQBODY : ', req.body);
+  const latitude = req.body.latitude;
+  const longitude = req.body.longitude;
 
   var url =
     'http://openapi.tago.go.kr/openapi/service/BusSttnInfoInqireService/getCrdntPrxmtSttnList';
   var queryParams =
-    '?' + encodeURIComponent('ServiceKey') + '=서비스키'; /* Service Key*/
+    '?' +
+    encodeURIComponent('ServiceKey') +
+    `=${process.env.API_SERVICEKEY}`; /* Service Key*/
   queryParams +=
     '&' +
     encodeURIComponent('gpsLati') +
     '=' +
-    encodeURIComponent('36.3'); /* */
+    encodeURIComponent(String(latitude)); /* */
   queryParams +=
     '&' +
     encodeURIComponent('gpsLong') +
     '=' +
-    encodeURIComponent('127.3'); /* */
+    encodeURIComponent(String(longitude)); /* */
 
   request(
     {
@@ -215,9 +219,72 @@ router.get('/api/busstop', (req, res) => {
       method: 'GET',
     },
     function (error, response, body) {
-      console.log('Status', response.statusCode);
-      console.log('Headers', JSON.stringify(response.headers));
-      console.log('Reponse received', body);
+      // console.log('Status', response.statusCode);
+      // console.log('Headers', JSON.stringify(response.headers));
+      // console.log('Reponse received', body);
+      var xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
+      var obj = JSON.parse(xmlToJson);
+      // console.log('XMLTOJSON : ', obj.response.body.items.item);
+      if (obj.response.body.items.item) {
+        res.send({result: 'success', body: obj.response.body.items.item});
+      } else {
+        console.log('ITEM NOT FOUND');
+        url = 'http://ws.bus.go.kr/api/rest/stationinfo/getStationByPos';
+        queryParams =
+          '?' +
+          encodeURIComponent('ServiceKey') +
+          `=${process.env.API_SERVICEKEY}`; /* Service Key*/
+        queryParams +=
+          '&' +
+          encodeURIComponent('tmX') +
+          '=' +
+          encodeURIComponent(String(longitude)); /* */
+        queryParams +=
+          '&' +
+          encodeURIComponent('tmY') +
+          '=' +
+          encodeURIComponent(String(latitude)); /* */
+        queryParams +=
+          '&' +
+          encodeURIComponent('radius') +
+          '=' +
+          encodeURIComponent('1000'); /* */
+
+        request(
+          {
+            url: url + queryParams,
+            method: 'GET',
+          },
+          function (error, response, body) {
+            //console.log('Status', response.statusCode);
+            //console.log('Headers', JSON.stringify(response.headers));
+
+            xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
+            obj = JSON.parse(xmlToJson);
+            // console.log('result : ', obj.ServiceResult.msgBody.itemList);
+            res.send({
+              result: 'failed',
+              body: obj.ServiceResult.msgBody.itemList,
+            });
+          },
+        );
+      }
+    },
+  );
+});
+
+router.post('/api/post/changePhone', (req, res) => {
+  const userPhone = req.body.userPhone;
+  const chngUserPhone = req.body.chngUserPhone;
+  db.query(
+    'UPDATE user SET userPhone = ? WHERE userPhone = ?',
+    [chngUserPhone, userPhone],
+    (err, result) => {
+      if (!err) {
+        res.send({result: '200'});
+      } else {
+        res.send({result: '404'});
+      }
     },
   );
 });

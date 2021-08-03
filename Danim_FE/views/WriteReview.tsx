@@ -3,7 +3,7 @@ import {Text, StyleSheet, Image, View} from 'react-native';
 import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Button} from 'react-native-paper';
-import ReviewInput from '../components/WriteReview/ReviewInput';
+import ReviewInput from '../components/writeReview/ReviewInput';
 
 type WriteReviewScreenNavigationProps = StackNavigationProp<
   HomeStackParamList,
