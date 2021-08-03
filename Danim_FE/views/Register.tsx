@@ -125,7 +125,11 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
           // 인증번호 확인
           Alert.alert('인증번호 확인이 필요합니다.');
         } else {
-          let getRegisterResult = await funcRegister({userName, userPhone, userCertify});
+          let getRegisterResult = await funcRegister({
+            userName,
+            userPhone,
+            userCertify,
+          });
           if (getRegisterResult) {
             Alert.alert('회원가입 성공');
             navigation.navigate(HomeScreens.RegisterWait);
@@ -163,12 +167,11 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       <EmptyView />
       <Text>장애인 증명서</Text>
       <Text>userCertify: {userCertify}</Text>
-      <View
-        style={{alignItems: 'center'}}>
+      <View style={{alignItems: 'center'}}>
         <ImageBackground
-          source={{uri:userCertify}}
+          source={{uri: userCertify}}
           style={{width: 200, height: 100, alignItems: 'center'}}
-          imageStyle={{borderRadius: 10}} 
+          imageStyle={{borderRadius: 10}}
         />
       </View>
       <EmptyView />
@@ -194,40 +197,41 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
         title="첨부"
       /> */}
       <Button
-        onPress={() => 
-          {
-            console.log('사진 선택하기')
-            ImagePicker.openPicker({
-              path: 'my-file-path.jpg',
-              width: 400,
-              height: 300,
-              cropping: true
-            }).then(async image => {
-              setUserCertify(image.path);
-              console.log("사진!!!!: " + userCertify);    
-              
-              const data = new FormData();
-              data.append('name', 'imgCertification');
-              data.append('fileData', {
-                uri : userCertify,
-                name: image
-              });
-              
-              const config = {
-                method: 'POST',
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'multipart/form-data',
-                },
-                body: data,
-              };
-              fetch("http://localhost:5000/" + "api/upload", config)
-              .then((checkStatusAndGetJSONResponse)=>{       
-                console.log(checkStatusAndGetJSONResponse);
-              }).catch((err)=>{console.log(err)});
+        onPress={() => {
+          console.log('사진 선택하기');
+          ImagePicker.openPicker({
+            path: 'my-file-path.jpg',
+            width: 400,
+            height: 300,
+            cropping: true,
+          }).then(async image => {
+            setUserCertify(image.path);
+            console.log('사진!!!!: ' + userCertify);
+
+            const data = new FormData();
+            data.append('name', 'imgCertification');
+            data.append('fileData', {
+              uri: userCertify,
+              name: image,
             });
-          }
-        }
+
+            const config = {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'multipart/form-data',
+              },
+              body: data,
+            };
+            fetch('http://localhost:5000/' + 'api/upload', config)
+              .then(checkStatusAndGetJSONResponse => {
+                console.log(checkStatusAndGetJSONResponse);
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          });
+        }}
         color="#2C3E50"
         title="첨부"
       />

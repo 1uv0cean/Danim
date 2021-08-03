@@ -1,9 +1,9 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
-import {Marker} from 'react-native-maps';
+import {Marker, Callout} from 'react-native-maps';
 import {funcGetBusstop} from '../../function/funcGetBusstop';
 
 const styles = StyleSheet.create({
@@ -25,14 +25,18 @@ interface ILocation {
 
 function GoogleMap() {
   const [location, setLocation] = useState<ILocation | undefined>(undefined);
+  const [nearStop, setNearStop] = useState<[]>([]);
 
-  const doGetBusstop = async () => {
+  const doGetBusstop = async ({latitude, longitude}: any) => {
     try {
-      let getResult = await funcGetBusstop();
+      let getResult = await funcGetBusstop({latitude, longitude});
+      setNearStop(getResult);
+      return getResult;
     } catch (e) {
       console.log(e);
     }
   };
+
   useEffect(() => {
     // 현재 위치 받아오기
     Geolocation.getCurrentPosition(
@@ -42,13 +46,14 @@ function GoogleMap() {
           latitude,
           longitude,
         });
-        // doGetBusstop();
+        doGetBusstop({latitude, longitude});
       },
       error => {
         console.log(error.code, error.message);
       },
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -74,6 +79,52 @@ function GoogleMap() {
               // longitude: 126.6575,
             }}
           />
+          {nearStop !== undefined &&
+            nearStop.map((test: any) =>
+              test?.nodeno?._text !== undefined ? (
+                <Marker
+                  key={test.nodeno._text}
+                  coordinate={{
+                    latitude: test.gpslati._text * 1,
+                    longitude: test.gpslong._text * 1,
+                  }}>
+                  <Callout tooltip>
+                    <View>
+                      <Text>
+                        {/* {marker.title}
+                        {'\n'}
+                        {marker.description} */}
+                        {test.nodeid._text}
+                        {'\n'}
+                        {test.nodenm._text}
+                        {'\n'}
+                        {test.nodeno._text}
+                      </Text>
+                    </View>
+                  </Callout>
+                </Marker>
+              ) : (
+                <Marker
+                  key={test.stationId._text}
+                  coordinate={{
+                    latitude: test.gpsY._text * 1,
+                    longitude: test.gpsX._text * 1,
+                  }}>
+                  <Callout tooltip>
+                    <View>
+                      <Text>
+                        {/* {marker.title}
+                    {'\n'}
+                    {marker.description} */}
+                        {test.stationId._text}
+                        {'\n'}
+                        {test.stationNm._text}
+                      </Text>
+                    </View>
+                  </Callout>
+                </Marker>
+              ),
+            )}
         </MapView>
       )}
     </View>

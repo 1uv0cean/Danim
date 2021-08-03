@@ -7,6 +7,6 @@ const Bus = () => {
       <Text>Bus</Text>
     </View>
   );
-}
+};
 
-export default Bus
+export default Bus;
