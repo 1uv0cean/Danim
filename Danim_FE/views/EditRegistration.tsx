@@ -4,7 +4,7 @@ import {Text, View, StyleSheet, ImageBackground} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Button} from 'react-native-paper';
 import ImagePicker from 'react-native-image-crop-picker';
-import RegistrationInput from '../components/EditRegistration/RegistrationInput';
+import RegistrationInput from '../components/editRegistration/RegistrationInput';
 
 type EditRegistrationScreenNavigationProps = StackNavigationProp<
   HomeStackParamList,
