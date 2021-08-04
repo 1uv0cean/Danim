@@ -145,6 +145,8 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
     }
   };
 
+  const [imgPath, setImgPath] = useState<string>('');
+
   return (
     <Container>
       <Text>이름</Text>
@@ -166,7 +168,6 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       <Button onPress={doCheckCertify} color="#2C3E50" title="확인" />
       <EmptyView />
       <Text>장애인 증명서</Text>
-      <Text>userCertify: {userCertify}</Text>
       <View style={{alignItems: 'center'}}>
         <ImageBackground
           source={{uri: userCertify}}
@@ -178,24 +179,6 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       <EmptyView />
       <EmptyView />
       <EmptyView />
-      {/* <Button
-        onPress={() => 
-          {
-            console.log('사진 선택하기')
-            ImagePicker.openPicker({
-              path: 'my-file-path.jpg',
-              width: 400,
-              height: 300,
-              cropping: true
-            }).then(image => {
-              setImgPath(image.path);
-              console.log("사진!!!!: " + imgPath);              
-            });
-          }
-        }
-        color="#2C3E50"
-        title="첨부"
-      /> */}
       <Button
         onPress={() => {
           console.log('사진 선택하기');
@@ -205,31 +188,8 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
             height: 300,
             cropping: true,
           }).then(async image => {
-            setUserCertify(image.path);
-            console.log('사진!!!!: ' + userCertify);
-
-            const data = new FormData();
-            data.append('name', 'imgCertification');
-            data.append('fileData', {
-              uri: userCertify,
-              name: image,
-            });
-
-            const config = {
-              method: 'POST',
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'multipart/form-data',
-              },
-              body: data,
-            };
-            fetch('http://localhost:5000/' + 'api/upload', config)
-              .then(checkStatusAndGetJSONResponse => {
-                console.log(checkStatusAndGetJSONResponse);
-              })
-              .catch(err => {
-                console.log(err);
-              });
+            setImgPath(image.path);
+            console.log('사진!!!!: ' + imgPath);
           });
         }}
         color="#2C3E50"
@@ -240,7 +200,40 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
       <EmptyView />
       <EmptyView />
       <EmptyView />
-      <Button onPress={doRegister} color="#2C3E50" title="완료" />
+      <Button onPress={() =>
+        {
+          setUserCertify(userPhone+'_imgCertification.jpg')
+
+          const data = new FormData();
+
+          data.append('name', 'imgCertification');
+          data.append('fileData', {
+            uri: imgPath,
+            type: 'image/jpeg', 
+            name: userPhone+'_imgCertification.jpg'
+          });
+
+          const config = {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'multipart/form-data',
+            },
+            body: data,
+          };
+
+          //ex) "http://10.200.52.60:5000/api/upload"
+          fetch('http://ip 주소!!!!:5000/api/upload', config)
+            .then(checkStatusAndGetJSONResponse => {
+              console.log(checkStatusAndGetJSONResponse);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+
+            doRegister();
+          }
+        } color="#2C3E50" title="완료" />
     </Container>
   );
 };
