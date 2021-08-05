@@ -2,31 +2,30 @@ import React from 'react';
 import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {StackNavigationProp} from '@react-navigation/stack';
 import SearchBar from '../components/main/SearchBar';
-import GoogleMap from '../components/main/GoogleMap';
 import {View} from 'react-native';
 
-type MainScreenNavigationProps = StackNavigationProp<
+type SearchScreenNavigationProps = StackNavigationProp<
   HomeStackParamList,
   HomeScreens.Main
 >;
 
-export type MainParams = {
+export type SearchParams = {
   symbol: string; // DetailsScreen 에는 symbol 이라는 이름의 string 타입의 파라미터가 필요하다.
 };
 
-interface MainScreenProps {
-  route: {params: MainParams}; // 루트의 파라미터로 방금 지정해준 DetailsParams 타입이 온다.
-  navigation: MainScreenNavigationProps;
+interface SearchScreenProps {
+  route: {params: SearchParams}; // 루트의 파라미터로 방금 지정해준 DetailsParams 타입이 온다.
+  navigation: SearchScreenNavigationProps;
 }
 
-const Main: React.FunctionComponent<MainScreenProps> = () => {
+const Search: React.FunctionComponent<SearchScreenProps> = () => {
   return (
     <>
       <View>
-        <GoogleMap />
+        <SearchBar />
       </View>
     </>
   );
 };
 
-export default Main;
+export default Search;
