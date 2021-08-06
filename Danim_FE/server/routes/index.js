@@ -377,4 +377,70 @@ router.get('/api/getWholeBus', (req, res) => {
   res.send({result: 'success', body: retArr});
 });
 
+router.post('/api/post/getSelBusStop', (req, res) => {
+  const busNumber = req.body.busNumber;
+  console.log('BUSNUMBER : ', busNumber);
+  var url = 'http://ws.bus.go.kr/api/rest/busRouteInfo/getBusRouteList';
+  var queryParams =
+    '?' +
+    encodeURIComponent('ServiceKey') +
+    `=${process.env.API_SERVICEKEY}`; /* Service Key*/
+  queryParams +=
+    '&' +
+    encodeURIComponent('strSrch') +
+    '=' +
+    encodeURIComponent(busNumber); /* */
+
+  request(
+    {
+      url: url + queryParams,
+      method: 'GET',
+    },
+    function (error, response, body) {
+      //console.log('Status', response.statusCode);
+      //console.log('Headers', JSON.stringify(response.headers));
+      // console.log('Reponse received', body);
+      var xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
+      var obj = JSON.parse(xmlToJson);
+
+      // console.log(
+      //   'obj : ',
+      //   obj.ServiceResult.msgBody.itemList[0].busRouteId._text,
+      // );
+
+      if (
+        obj.ServiceResult.msgBody.itemList[0].busRouteId._text !== undefined
+      ) {
+        var url = 'http://ws.bus.go.kr/api/rest/busRouteInfo/getStaionByRoute';
+        var queryParams =
+          '?' +
+          encodeURIComponent('ServiceKey') +
+          `=${process.env.API_SERVICEKEY}`; /* Service Key*/
+        queryParams +=
+          '&' +
+          encodeURIComponent('busRouteId') +
+          '=' +
+          encodeURIComponent(
+            obj.ServiceResult.msgBody.itemList[0].busRouteId._text,
+          ); /* */
+
+        request(
+          {
+            url: url + queryParams,
+            method: 'GET',
+          },
+          function (error, response, body) {
+            //console.log('Status', response.statusCode);
+            //console.log('Headers', JSON.stringify(response.headers));
+            //console.log('Reponse received', body);
+            var xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
+            var obj = JSON.parse(xmlToJson);
+            console.log(obj.ServiceResult.msgBody.itemList);
+          },
+        );
+      }
+    },
+  );
+});
+
 module.exports = router;
