@@ -13,6 +13,7 @@ import EditRegistration from '../views/EditRegistration';
 import WriteReview from '../views/WriteReview';
 import ReservationList from '../views/ReservationList';
 import Favorites from '../views/FavoritesMain';
+import Search from '../views/SearchMain';
 
 export enum HomeScreens {
   Login = 'Login',
@@ -59,11 +60,14 @@ const TabNavigator: React.FunctionComponent = ({route}: any) => {
             iconName = focused ? 'heart' : 'heart-outline';
           } else if (route.name === '내정보') {
             iconName = focused ? 'people' : 'people-outline';
+          } else if (route.name === '검색') {
+            iconName = focused ? 'search' : 'search-outline';
           }
           return <Ionicons name={iconName} size={25} color={'#2C3E50'} />;
         },
       })}>
       <Tab.Screen name="현재위치" component={Main} />
+      <Tab.Screen name="검색" component={Search} />
       <Tab.Screen
         name="예약내역"
         component={ReservationList}
