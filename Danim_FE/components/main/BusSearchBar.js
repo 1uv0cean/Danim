@@ -139,7 +139,9 @@ const busSearchBar = () => {
   const ItemView = ({item}) => {
     return (
       // Flat List Item
-      <Text style={styles.itemStyle} onPress={() => goToReservation(item)}>        {/* {item.노선번호} */}
+      <Text style={styles.itemStyle} onPress={() => goToReservation(item)}>
+        {/* {item.노선번호} */}
+
         {/* {'.'} */}
         {item.노선번호}
       </Text>
@@ -161,6 +163,9 @@ const busSearchBar = () => {
 
   const goToReservation = async item => {
     // Function for click on an item
+
+    // Alert.alert('Id : ' + item.노선번호 + ' Title : ' + item.노선번호);
+
     const busNumber = item.노선번호;
     let getResult = await funcGetSelBusStop({busNumber});
   };
