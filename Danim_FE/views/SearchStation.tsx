@@ -1,7 +1,7 @@
 import React from 'react';
 import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {StackNavigationProp} from '@react-navigation/stack';
-import SearchBar from '../components/main/SearchBar';
+import StationSearchBar from '../components/main/StationSearchBar';
 import {View} from 'react-native';
 
 type SearchScreenNavigationProps = StackNavigationProp<
@@ -18,14 +18,14 @@ interface SearchScreenProps {
   navigation: SearchScreenNavigationProps;
 }
 
-const Search: React.FunctionComponent<SearchScreenProps> = () => {
+const SearchStation: React.FunctionComponent<SearchScreenProps> = () => {
   return (
     <>
       <View>
-        <SearchBar />
+        <StationSearchBar />
       </View>
     </>
   );
 };
 
-export default Search;
+export default SearchStation;

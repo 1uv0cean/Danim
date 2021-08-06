@@ -14,7 +14,7 @@ import {
   TextInput,
 } from 'react-native';
 
-const SearchBar = () => {
+const BusSearchBar = () => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -93,7 +93,7 @@ const SearchBar = () => {
           onChangeText={(text) => searchFilterFunction(text)}
           value={search}
           underlineColorAndroid="transparent"
-          placeholder="버스 / 정류장 검색"
+          placeholder="버스 검색"
         />
           <FlatList
           data={filteredDataSource}
@@ -123,4 +123,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchBar;
+export default BusSearchBar;

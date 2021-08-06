@@ -1,7 +1,6 @@
 import React from 'react';
 import {HomeScreens, HomeStackParamList} from '../navigators/index';
 import {StackNavigationProp} from '@react-navigation/stack';
-import SearchBar from '../components/main/SearchBar';
 import GoogleMap from '../components/main/GoogleMap';
 import {View} from 'react-native';
 
