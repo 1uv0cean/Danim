@@ -3,7 +3,7 @@
 
 // import React in our code
 import React, {useState, useEffect} from 'react';
-
+import {funcGetSelBusStop} from '../../function/funcGetSelBusStop';
 // import all the components we are going to use
 import {
   SafeAreaView,
@@ -139,8 +139,7 @@ const busSearchBar = () => {
   const ItemView = ({item}) => {
     return (
       // Flat List Item
-      <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-        {/* {item.노선번호} */}
+      <Text style={styles.itemStyle} onPress={() => goToReservation(item)}>        {/* {item.노선번호} */}
         {/* {'.'} */}
         {item.노선번호}
       </Text>
@@ -160,9 +159,10 @@ const busSearchBar = () => {
     );
   };
 
-  const getItem = item => {
+  const goToReservation = async item => {
     // Function for click on an item
-    alert('Id : ' + item.노선번호 + ' Title : ' + item.노선번호);
+    const busNumber = item.노선번호;
+    let getResult = await funcGetSelBusStop({busNumber});
   };
 
   return (
