@@ -14,7 +14,7 @@ import {
   TextInput,
 } from 'react-native';
 
-const StationSearchBar = () => {
+const stationSearchBar = () => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -123,4 +123,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StationSearchBar;
+export default stationSearchBar;

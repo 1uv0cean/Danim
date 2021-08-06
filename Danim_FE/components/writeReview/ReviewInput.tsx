@@ -8,10 +8,9 @@ const TextInput = styled.TextInput`
   border-radius: 5px;
   border-width: 1px;
   border-color: #a5a5a5;
-  
 `;
 
-const ReviewInput = () => {
+const reviewInput = () => {
   return (
     <TextInput style={{flexShrink: 1}} multiline={true}>
       {' '}
@@ -19,4 +18,4 @@ const ReviewInput = () => {
   );
 };
 
-export default ReviewInput;
+export default reviewInput;

@@ -13,7 +13,7 @@ interface Props {
   setUserPhone: (value: string) => void;
 }
 
-const PhoneNumInput: React.FC<Props> = (props: Props) => {
+const phoneNumInput: React.FC<Props> = (props: Props) => {
   return (
     <TextInput
       keyboardType="numeric"
@@ -22,4 +22,4 @@ const PhoneNumInput: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default PhoneNumInput;
+export default phoneNumInput;

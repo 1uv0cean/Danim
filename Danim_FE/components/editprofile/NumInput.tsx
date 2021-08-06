@@ -13,7 +13,7 @@ interface Props {
   setUserAuth: (value: string) => void;
 }
 
-const NumInput: React.FC<Props> = (props: Props) => {
+const numInput: React.FC<Props> = (props: Props) => {
   return (
     <TextInput
       keyboardType="numeric"
@@ -22,4 +22,4 @@ const NumInput: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default NumInput;
+export default numInput;

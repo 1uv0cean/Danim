@@ -4,7 +4,6 @@
 // import React in our code
 import React, {useState, useEffect} from 'react';
 import {funcGetSelBusStop} from '../../function/funcGetSelBusStop';
-
 // import all the components we are going to use
 import {
   SafeAreaView,
@@ -17,7 +16,7 @@ import {
 } from 'react-native';
 import {funcGetWholeBus} from '../../function/funcGetWholeBus';
 
-const BusSearchBar = () => {
+const busSearchBar = () => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -142,6 +141,7 @@ const BusSearchBar = () => {
       // Flat List Item
       <Text style={styles.itemStyle} onPress={() => goToReservation(item)}>
         {/* {item.노선번호} */}
+
         {/* {'.'} */}
         {item.노선번호}
       </Text>
@@ -165,6 +165,7 @@ const BusSearchBar = () => {
     // Function for click on an item
 
     // Alert.alert('Id : ' + item.노선번호 + ' Title : ' + item.노선번호);
+
     const busNumber = item.노선번호;
     let getResult = await funcGetSelBusStop({busNumber});
   };
@@ -205,4 +206,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BusSearchBar;
+export default busSearchBar;
