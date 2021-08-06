@@ -14,6 +14,7 @@ import WriteReview from '../views/WriteReview';
 import ReservationList from '../views/ReservationList';
 import Favorites from '../views/FavoritesMain';
 import Search from '../views/SearchMain';
+import Reservation from '../views/Reservation';
 
 export enum HomeScreens {
   Login = 'Login',
@@ -25,6 +26,7 @@ export enum HomeScreens {
   EditRegistration = 'EditRegistration',
   WriteReview = 'WriteReview',
   TabNavigator = 'TabNavigator',
+  Reservation = 'Reservation',
 }
 
 export type HomeStackParamList = {
@@ -38,6 +40,7 @@ export type HomeStackParamList = {
   WriteReview: any;
   TabNavigator: any;
   names: any;
+  Reservation: any;
 };
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
@@ -114,6 +117,10 @@ const HomeStackNavigator: React.FunctionComponent = () => {
         <HomeStack.Screen
           name={HomeScreens.WriteReview}
           component={WriteReview}
+        />
+        <HomeStack.Screen
+          name={HomeScreens.Reservation}
+          component={Reservation}
         />
       </HomeStack.Navigator>
     </NavigationContainer>

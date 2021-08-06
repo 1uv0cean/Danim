@@ -5,8 +5,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {Button} from 'react-native-paper';
 import {funcPostSMS} from '../function/funcSendChangeSMS';
 import {funcChangePhone} from '../function/funcChangePhone';
-import PhoneNumInput from '../components/editprofile/PhoneNumInput';
-import NumInput from '../components/editprofile/NumInput';
+import PhoneNumInput from '../components/editProfile/PhoneNumInput';
+import NumInput from '../components/editProfile/NumInput';
 
 type EditProfileScreenNavigationProps = StackNavigationProp<
   HomeStackParamList,
