@@ -8,6 +8,7 @@ import {funcChangePhone} from '../function/funcChangePhone';
 import PhoneNumInput from '../components/editProfile/PhoneNumInput';
 import NumInput from '../components/editProfile/NumInput';
 
+
 type EditProfileScreenNavigationProps = StackNavigationProp<
   HomeStackParamList,
   HomeScreens.EditProfile
