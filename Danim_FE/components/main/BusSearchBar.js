@@ -14,14 +14,9 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-
-<<<<<<< HEAD:Danim_FE/components/main/BusSearchBar.js
-const BusSearchBar = () => {
-=======
 import {funcGetWholeBus} from '../../function/funcGetWholeBus';
 
-const SearchBar = () => {
->>>>>>> d73b05ffdb2c143cd8eda86b92066544cfed2958:Danim_FE/components/main/SearchBar.js
+const BusSearchBar = () => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -41,7 +36,7 @@ const SearchBar = () => {
   const getWholeBusList = async () => {
     try {
       let getResult = await funcGetWholeBus();
-      console.log('GETRESULT : ', getResult);
+      // console.log('GETRESULT : ', getResult);
       setFilteredDataSource(getResult);
       setMasterDataSource(getResult);
     } catch (e) {
@@ -171,31 +166,13 @@ const SearchBar = () => {
   };
 
   return (
-<<<<<<< HEAD:Danim_FE/components/main/BusSearchBar.js
-      <View style={styles.container}>
-        <TextInput
-          style={styles.textInputStyle}
-          onChangeText={(text) => searchFilterFunction(text)}
-          value={search}
-          underlineColorAndroid="transparent"
-          placeholder="버스 검색"
-        />
-          <FlatList
-          data={filteredDataSource}
-          keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={ItemSeparatorView}
-          renderItem={ItemView}
-        />
-        
-      </View>
-=======
     <View style={styles.container}>
       <TextInput
         style={styles.textInputStyle}
         onChangeText={text => searchFilterFunction(text)}
         value={search}
         underlineColorAndroid="transparent"
-        placeholder="버스 / 정류장 검색"
+        placeholder="버스 검색"
       />
       <FlatList
         data={filteredDataSource}
@@ -204,7 +181,6 @@ const SearchBar = () => {
         renderItem={ItemView}
       />
     </View>
->>>>>>> d73b05ffdb2c143cd8eda86b92066544cfed2958:Danim_FE/components/main/SearchBar.js
   );
 };
 
@@ -225,8 +201,4 @@ const styles = StyleSheet.create({
   },
 });
 
-<<<<<<< HEAD:Danim_FE/components/main/BusSearchBar.js
 export default BusSearchBar;
-=======
-export default SearchBar;
->>>>>>> d73b05ffdb2c143cd8eda86b92066544cfed2958:Danim_FE/components/main/SearchBar.js
