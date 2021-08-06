@@ -18,6 +18,7 @@ app.post('/api/chkDuplicate', api);
 app.post('/api/upload', api);
 app.post('/api/busstop', api);
 app.post('/api/post/changePhone', api);
+app.post('/api/post/getSelBusStop', api);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
