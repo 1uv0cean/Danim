@@ -8,6 +8,7 @@ app.use('/api', api);
 
 // get
 app.get('/api', api);
+app.get('/api/getWholeBus', api);
 
 //post
 app.post('/api/register', api);
