@@ -5,10 +5,12 @@ const dotenv = require('dotenv');
 const path = require('path');
 const multer = require('multer');
 const convert = require('xml-js');
+const xlsx = require('xlsx');
 
 var fs = require('fs');
 
 var request = require('request');
+var thenRequest = require('then-request');
 
 //create signature2
 var CryptoJS = require('crypto-js');
@@ -287,4 +289,92 @@ router.post('/api/post/changePhone', (req, res) => {
     },
   );
 });
+
+router.get('/api/getWholeBus', (req, res) => {
+  const locArr = ['12', '22', '23', '24'];
+
+  const busArr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  let retArr = [];
+  // var itemsProcessed = 0;
+  // locArr.forEach(item => {
+  //   var tempCount = 0;
+  //   busArr.forEach(busItem => {
+  //     // 01.
+  //     var url =
+  //       'http://openapi.tago.go.kr/openapi/service/BusRouteInfoInqireService/getRouteNoList';
+  //     var queryParams =
+  //       '?' +
+  //       encodeURIComponent('ServiceKey') +
+  //       `=${process.env.API_SERVICEKEY}`; /* Service Key*/
+  //     queryParams +=
+  //       '&' +
+  //       encodeURIComponent('cityCode') +
+  //       '=' +
+  //       encodeURIComponent(item); /* */
+  //     queryParams +=
+  //       '&' +
+  //       encodeURIComponent('routeNo') +
+  //       '=' +
+  //       encodeURIComponent(busItem); /* */
+  //     thenRequest('GET', url + queryParams)
+  //       .getBody('utf8')
+  //       .done(result => {
+  //         // console.log(result);
+  //         var xmlToJson = convert.xml2json(result, {compact: true, spaces: 4});
+  //         var obj = JSON.parse(xmlToJson);
+  //         if (obj.response.body.items !== undefined) {
+  //           obj.response.body.items.item.forEach(value => {
+  //             retArr.push(value);
+  //           });
+  //           tempCount++;
+  //           if (tempCount === busArr.length) {
+  //             itemsProcessed++;
+  //             console.log('INSIDE : ', retArr);
+  //             res.send({result: 'success', body: retArr});
+  //           }
+  //           if (itemsProcessed === locArr.length) {
+  //             console.log('INSIDE : ', retArr);
+  //             res.send({result: 'success', body: retArr});
+  //           }
+  //         }
+  //       });
+
+  //     // 02.
+  //     // thenRequest(
+  //     //   {
+  //     //     url: url + queryParams,
+  //     //     method: 'GET',
+  //     //   },
+  //     //   function (error, response, body) {
+  //     //     var xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
+  //     //     var obj = JSON.parse(xmlToJson);
+  //     //     // console.log(obj.response.body.items);
+  //     //     // retArr.push(obj.response.body.items.item);
+  //     //     obj.response.body.items.item.forEach(value => {
+  //     //       retArr.push(value);
+  //     //     });
+  //     //     console.log(retArr);
+  //     //   },
+  //     // ).done(function (dd) {
+  //     //   console.log('RES : ', dd);
+  //     // });
+  //     // console.log('OUTSIDE : ', retArr);
+  //   });
+  // });
+  // console.log('OUTSIDE : ', retArr);
+
+  // eslint-disable-next-line no-path-concat
+  const excelFile = xlsx.readFile(__dirname + '/lowbus.xlsx');
+  // @breif 엑셀 파일의 첫번째 시트의 정보를 추출
+  const sheetName = excelFile.SheetNames[0]; // @details 첫번째 시트 정보 추출
+  const firstSheet = excelFile.Sheets[sheetName]; // @details 시트의 제목 추출
+  // @details 엑셀 파일의 첫번째 시트를 읽어온다.
+  const jsonData = xlsx.utils.sheet_to_json(firstSheet, {defval: ''});
+
+  jsonData.map(item => {
+    retArr.push(item);
+  });
+  res.send({result: 'success', body: retArr});
+});
+
 module.exports = router;
