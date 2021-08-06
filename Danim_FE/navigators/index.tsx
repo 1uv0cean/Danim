@@ -9,11 +9,11 @@ import Register from '../views/Register';
 import RegisterWait from '../views/RegisterWait';
 import MyPage from '../views/Mypage';
 import EditProfile from '../views/EditProfile';
-import EditRegistration from '../views/EditRegistration';
-import WriteReview from '../views/WriteReview';
+import Search from '../views/SearchMain';
 import ReservationList from '../views/ReservationList';
 import Favorites from '../views/FavoritesMain';
-import Search from '../views/SearchMain';
+import EditRegistration from '../views/EditRegistration';
+import WriteReview from '../views/WriteReview';
 
 export enum HomeScreens {
   Login = 'Login',

@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import {funcGetWholeBus} from '../../function/funcGetWholeBus';
 
-const BusSearchBar = () => {
+const busSearchBar = () => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -201,4 +201,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BusSearchBar;
+export default busSearchBar;
