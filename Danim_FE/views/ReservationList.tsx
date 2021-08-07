@@ -26,11 +26,42 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
     listContainer: {
       flex: 1,
      },
-    listItem: {
-       padding: 10,
-       fontSize: 18,
-       height: 44,
+    listBusNum: {
+      flex: 1,
+      flexDirection:'column',
+      padding: 10,
+      fontSize: 30,
+      fontWeight:'bold',
      },
+     listBusDate: {
+       flex: 1,
+       flexDirection:'column',
+       marginLeft:-50,
+     },
+     listBusStation:{
+       paddingLeft: 12,
+     },
+     listBusStation2:{
+      paddingLeft: 7,
+      marginRight: 20,
+    },
+     elem: {
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      borderColor:'#eee',
+      borderBottomWidth:0.5,
+      padding: 5,
+    },
+    itmeView: {
+      width: '85%',
+      alignSelf: 'center',
+      borderRadius: 1,
+      elevation: 5,
+      marginTop: 10,
+      paddingBottom: 20,
+    },
   })
   return (
     <>
@@ -39,24 +70,66 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
       <Text style={styles.topLayoutText}>리뷰는 하차 후 하루 이내에 작성해 주셔야 합니다.</Text>
     </View>
     <View style={styles.listContainer}>
-        <FlatList
+    <FlatList
           data={[
-            { key: '예약 내역 리스트' },
-            { key: '고양이' },
-            { key: '냥' },
-            { key: '야옹' },
-            { key: '차민재' },
-            { key: '홍주희' },
-            { key: '이샘미' },
-            { key: '한선희' },
-            { key: '송휘' },
-            { key: '조규철' },
-            { key: '김경원' },
-            { key: '모죽' },
-            { key: '얍' },
-            { key: '나와라' },
+            {
+              key: '3-2',
+              date: '2021.07.26(월요일) 18:13',
+              departure: '(주)창원',
+              arrival: '롯데백화점 (인천터미널)',
+              reviewable: 'yes',
+            },
+            {
+              key: '34',
+              date: '2021.07.03(토요일) 13:03',
+              departure: '모래내시장',
+              arrival: '남인천세무서',
+              reviewable: 'done',
+            },
+            {
+              key: '11',
+              date: '2021.06.16(월요일) 09:51',
+              departure: '가림고등학교',
+              arrival: '인하공업전문대학',
+              reviewable: 'no',
+            },
+            {
+              key: '77',
+              date: '2021.08.08(일요일) 02:31',
+              departure: '휘네집',
+              arrival: '고양이천국',
+              reviewable: 'no',
+            },
           ]}
-          renderItem={({ item }) => <Text style={styles.listItem}>{item.key}</Text>} />
+          renderItem={({item}) => (
+            <>
+            <View style={styles.itmeView}>
+            <View style={styles.elem}>
+              <Text style={styles.listBusNum}>
+                {item.key}
+              </Text>
+              <Text style={styles.listBusDate}>
+                {item.date}
+              </Text>
+            </View>
+            <Text style={styles.listBusStation}>
+              출발지: {item.departure}
+            </Text>
+            <Text style={styles.listBusStation}>
+            🚌
+            </Text>
+            <View style={styles.elem}>
+              <Text style={styles.listBusStation2}>
+                도착지: {item.arrival}
+              </Text>
+              <Text style={styles.listBusStation2}>
+                {item.reviewable}
+              </Text>
+            </View>
+            </View>
+            </>
+          )}
+        />
       </View>
       </>
   );
