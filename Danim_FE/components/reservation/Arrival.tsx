@@ -39,4 +39,4 @@ class ArrivalPicker extends Component{
         )
     }
 }
-export default ArrivalPicker;
+export default ArrivalPicker; 
