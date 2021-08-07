@@ -102,7 +102,7 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
             },
           ]}
           renderItem={({item}) => (
-            <>
+          <>
             <View style={styles.itmeView}>
             <View style={styles.elem}>
               <Text style={styles.listBusNum}>
@@ -123,7 +123,11 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
                 도착지: {item.arrival}
               </Text>
               <Text style={styles.listBusStation2}>
-                {item.reviewable}
+                {item.reviewable === 'yes'
+                  ? '리뷰가능'
+                  : item.reviewable === 'done'
+                  ? '리뷰완료'
+                  : '리뷰불가'}
               </Text>
             </View>
             </View>
