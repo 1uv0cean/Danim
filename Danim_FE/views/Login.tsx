@@ -122,9 +122,9 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
       />
       <EmptyView />
       <SMButton
-        onPress={() => navigation.navigate(HomeScreens.WriteReview)}
+        onPress={() => navigation.navigate(HomeScreens.WriteComment)}
         color="#2C3E50"
-        title="WriteReview"
+        title="Write Comment"
       />
       <CheckBoxView>
         <LoginCheckBox />
