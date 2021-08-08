@@ -412,4 +412,65 @@ router.post('/api/post/getSelBusStop', (req, res) => {
   );
 });
 
+router.get('/api/getWholeStop', (req, res) => {
+  var url = 'http://ws.bus.go.kr/api/rest/stationinfo/getLowStationByName';
+  var queryParams =
+    '?' +
+    encodeURIComponent('ServiceKey') +
+    `=${process.env.API_SERVICEKEY}`; /* Service Key*/
+  queryParams +=
+    '&' + encodeURIComponent('stSrch') + '=' + encodeURIComponent(''); /* */
+
+  request(
+    {
+      url: url + queryParams,
+      method: 'GET',
+    },
+    function (error, response, body) {
+      //console.log('Status', response.statusCode);
+      //console.log('Headers', JSON.stringify(response.headers));
+      //console.log('Reponse received', body);
+      var xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
+      var obj = JSON.parse(xmlToJson);
+      // console.log(obj.ServiceResult.msgBody.itemList);
+      res.send({result: 'success', body: obj.ServiceResult.msgBody.itemList});
+    },
+  );
+});
+
+router.post('/api/post/getSelBus', (req, res) => {
+  var stationNum = req.body.busNumber;
+  // console.log('STATIONNUM : ', stationNum);
+  var url = 'http://ws.bus.go.kr/api/rest/stationinfo/getLowStationByUid';
+  var queryParams =
+    '?' +
+    encodeURIComponent('ServiceKey') +
+    `=${process.env.API_SERVICEKEY}`; /* Service Key*/
+  queryParams +=
+    '&' +
+    encodeURIComponent('arsId') +
+    '=' +
+    encodeURIComponent(stationNum); /* */
+
+  request(
+    {
+      url: url + queryParams,
+      method: 'GET',
+    },
+    function (error, response, body) {
+      //console.log('Status', response.statusCode);
+      //console.log('Headers', JSON.stringify(response.headers));
+      //console.log('Reponse received', body);
+      var xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
+      var obj = JSON.parse(xmlToJson);
+      console.log(obj.ServiceResult.msgBody.itemList);
+      if (obj.ServiceResult.msgBody.itemList !== undefined) {
+        res.send({result: 'success', body: obj.ServiceResult.msgBody.itemList});
+      } else {
+        res.send({result: 'success', body: 'None'});
+      }
+    },
+  );
+});
+
 module.exports = router;

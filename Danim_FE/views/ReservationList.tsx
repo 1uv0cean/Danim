@@ -6,52 +6,57 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
   console.log(userPhone);
   const styles = StyleSheet.create({
     topLayout: {
-      backgroundColor :'#2C3E50',
+      backgroundColor: '#2C3E50',
       height: '15%',
     },
     topLayoutTitle: {
-      color: "white",
+      color: 'white',
       fontWeight: 'bold',
       fontSize: 25,
       marginLeft: 30,
       marginTop: 20,
     },
     topLayoutText: {
-      color: "white",
+      color: 'white',
       fontWeight: 'bold',
       fontSize: 15,
       marginLeft: 30,
-      marginTop:5,
+      marginTop: 5,
     },
     listContainer: {
       flex: 1,
-     },
+    },
+    listItem: {
+      padding: 10,
+      fontSize: 18,
+      height: 44,
+    },
     listBusNum: {
       flex: 1,
-      flexDirection:'column',
+      flexDirection: 'column',
       padding: 10,
       fontSize: 30,
-      fontWeight:'bold',
-     },
+      fontWeight: 'bold',
+    },
     listBusDate: {
-       flex: 1,
-       flexDirection:'column',
-       marginLeft:-50,
+      flex: 1,
+      flexDirection: 'column',
+      marginLeft: -50,
     },
-    listBusStation:{
-       paddingLeft: 12,
+    listBusStation: {
+      paddingLeft: 12,
     },
-    listBusStation2:{
+    listBusStation2: {
       paddingLeft: 7,
       marginRight: 20,
     },
-    reviewBlue:{
+    reviewBlue: {
       color: 'blue',
     },
-    reviewRed:{
+    reviewRed: {
       color: 'red',
     },
-    reviewBlack:{
+    reviewBlack: {
       color: 'black',
     },
     elem: {
@@ -59,8 +64,8 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      borderColor:'#eee',
-      borderBottomWidth:0.5,
+      borderColor: '#eee',
+      borderBottomWidth: 0.5,
       padding: 5,
     },
     itmeView: {
@@ -71,15 +76,17 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
       marginTop: 10,
       paddingBottom: 20,
     },
-  })
+  });
   return (
     <>
-    <View style={styles.topLayout}>
-      <Text style={styles.topLayoutTitle}>과거 예약 내역</Text>
-      <Text style={styles.topLayoutText}>리뷰는 하차 후 하루 이내에 작성해 주셔야 합니다.</Text>
-    </View>
-    <View style={styles.listContainer}>
-    <FlatList
+      <View style={styles.topLayout}>
+        <Text style={styles.topLayoutTitle}>과거 예약 내역</Text>
+        <Text style={styles.topLayoutText}>
+          리뷰는 하차 후 하루 이내에 작성해 주셔야 합니다.
+        </Text>
+      </View>
+      <View style={styles.listContainer}>
+        <FlatList
           data={[
             {
               key: '3-2',
@@ -111,46 +118,42 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
             },
           ]}
           renderItem={({item}) => (
-          <>
-            <View style={styles.itmeView}>
-            <View style={styles.elem}>
-              <Text style={styles.listBusNum}>
-                {item.key}
-              </Text>
-              <Text style={styles.listBusDate}>
-                {item.date}
-              </Text>
-            </View>
-            <Text style={styles.listBusStation}>
-              출발지: {item.departure}
-            </Text>
-            <Text style={styles.listBusStation}>
-            🚌
-            </Text>
-            <View style={styles.elem}>
-              <Text style={styles.listBusStation2}>
-                도착지: {item.arrival}
-              </Text>
-              <Text style={[styles.listBusStation2, 
-                item.reviewable ==='yes'
-                 ? styles.reviewBlue 
-                 : item.reviewable === 'no'
-                 ? styles.reviewRed
-                 : styles.reviewBlack
-                 ]}>
-                {item.reviewable === 'yes'
-                  ? '리뷰가능'
-                  : item.reviewable === 'done'
-                  ? '리뷰완료'
-                  : '리뷰불가'}
-              </Text>
-            </View>
-            </View>
+            <>
+              <View style={styles.itmeView}>
+                <View style={styles.elem}>
+                  <Text style={styles.listBusNum}>{item.key}</Text>
+                  <Text style={styles.listBusDate}>{item.date}</Text>
+                </View>
+                <Text style={styles.listBusStation}>
+                  출발지: {item.departure}
+                </Text>
+                <Text style={styles.listBusStation}>🚌</Text>
+                <View style={styles.elem}>
+                  <Text style={styles.listBusStation2}>
+                    도착지: {item.arrival}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.listBusStation2,
+                      item.reviewable === 'yes'
+                        ? styles.reviewBlue
+                        : item.reviewable === 'no'
+                        ? styles.reviewRed
+                        : styles.reviewBlack,
+                    ]}>
+                    {item.reviewable === 'yes'
+                      ? '리뷰가능'
+                      : item.reviewable === 'done'
+                      ? '리뷰완료'
+                      : '리뷰불가'}
+                  </Text>
+                </View>
+              </View>
             </>
           )}
         />
       </View>
-      </>
+    </>
   );
 };
 
