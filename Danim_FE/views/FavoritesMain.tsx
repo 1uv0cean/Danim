@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import Bus from './FavoritesBus';
@@ -26,8 +26,10 @@ const topNavitgator = createMaterialTopTabNavigator(
 
 const AppContainer = createAppContainer(topNavitgator);
 
-export default class Favorites extends Component {
-  render() {
-    return <AppContainer></AppContainer>;
-  }
-}
+const Favorites = () => {
+    return( 
+      <AppContainer></AppContainer>
+    );
+};
+
+export default Favorites
