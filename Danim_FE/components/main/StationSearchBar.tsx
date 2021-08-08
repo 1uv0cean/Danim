@@ -3,7 +3,9 @@
 
 // import React in our code
 import React, {useState, useEffect} from 'react';
-import {funcGetSelBusStop} from '../../function/funcGetSelBusStop';
+import {funcGetWholeStop} from '../../function/funcGetWholeStop';
+import {funcGetSelBus} from '../../function/funcGetSelBus';
+
 // import all the components we are going to use
 import {
   SafeAreaView,
@@ -14,9 +16,8 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import {funcGetWholeBus} from '../../function/funcGetWholeBus';
 
-const busSearchBar = () => {
+const stationSearchBar = () => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -33,9 +34,9 @@ const busSearchBar = () => {
   //     });
   // }, []);
 
-  const getWholeBusList = async () => {
+  const getWholeStopList = async () => {
     try {
-      let getResult = await funcGetWholeBus();
+      let getResult = await funcGetWholeStop();
       // console.log('GETRESULT : ', getResult);
       setFilteredDataSource(getResult);
       setMasterDataSource(getResult);
@@ -45,7 +46,7 @@ const busSearchBar = () => {
   };
 
   useEffect(() => {
-    getWholeBusList();
+    getWholeStopList();
   }, []);
 
   // const searchFilterFunction = text => {
@@ -71,37 +72,17 @@ const busSearchBar = () => {
   //   }
   // };
 
-  const searchFilterFunction = text => {
-    // for main things *********************
+  const searchFilterFunction = (text: React.SetStateAction<string>) => {
     // Check if searched text is not blank
-    // if (text) {
-    //   // Inserted text is not blank
-    //   // Filter the masterDataSource
-    //   // Update FilteredDataSource
-    //   const newData = masterDataSource.filter(function (item) {
-    //     const itemData = item.routeno._text
-    //       ? item.routeno._text.toUpperCase()
-    //       : ''.toUpperCase();
-    //     const textData = text.toUpperCase();
-    //     return itemData.indexOf(textData) > -1;
-    //   });
-    //   setFilteredDataSource(newData);
-    //   setSearch(text);
-    // } else {
-    //   // Inserted text is blank
-    //   // Update FilteredDataSource with masterDataSource
-    //   setFilteredDataSource(masterDataSource);
-    //   setSearch(text);
-    // }
     if (text) {
       // Inserted text is not blank
       // Filter the masterDataSource
       // Update FilteredDataSource
-      const newData = masterDataSource.filter(function (item) {
-        const itemData = item.노선번호
-          ? item.노선번호.toUpperCase()
+      const newData = masterDataSource.filter(function (item: {title: any}) {
+        const itemData = item.title
+          ? item.title.toUpperCase()
           : ''.toUpperCase();
-        const textData = text.toUpperCase();
+        const textData = text.toString().toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
       setFilteredDataSource(newData);
@@ -114,36 +95,13 @@ const busSearchBar = () => {
     }
   };
 
-  // const ItemView = ({item}) => {
-  //   return (
-  //     // Flat List Item
-  //     <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-  //       {item.id}
-  //       {'.'}
-  //       {item.title.toUpperCase()}
-  //     </Text>
-  //   );
-  // };
-  //
-  // * for main things
-  // const ItemView = ({item}) => {
-  //   return (
-  //     // Flat List Item
-  //     <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-  //       {item.routeid._text}
-  //       {'.'}
-  //       {item.routeno._text.toUpperCase()}
-  //     </Text>
-  //   );
-  // };
-  const ItemView = ({item}) => {
+  const ItemView = ({item}: any) => {
     return (
       // Flat List Item
       <Text style={styles.itemStyle} onPress={() => goToReservation(item)}>
-        {/* {item.노선번호} */}
-
-        {/* {'.'} */}
-        {item.노선번호}
+        {item.stNm._text}
+        {'.'}
+        {item.arsId._text}
       </Text>
     );
   };
@@ -165,9 +123,15 @@ const busSearchBar = () => {
     // Function for click on an item
 
     // Alert.alert('Id : ' + item.노선번호 + ' Title : ' + item.노선번호);
+    const stationNumber = item.arsId._text;
+    let getResult = await funcGetSelBus({stationNumber});
+    // Result : 선택한 정류장의 저상버스 도착정보
+    console.log('GETRESULT : ', getResult);
+  };
 
-    const busNumber = item.노선번호;
-    let getResult = await funcGetSelBusStop({busNumber});
+  const getItem = (item: {id: string; title: string}) => {
+    // Function for click on an item
+    Alert.alert('Id : ' + item.id + ' Title : ' + item.title);
   };
 
   return (
@@ -177,7 +141,7 @@ const busSearchBar = () => {
         onChangeText={text => searchFilterFunction(text)}
         value={search}
         underlineColorAndroid="transparent"
-        placeholder="버스 검색"
+        placeholder="정류장 검색"
       />
       <FlatList
         data={filteredDataSource}
@@ -206,4 +170,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default busSearchBar;
+export default stationSearchBar;
