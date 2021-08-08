@@ -31,6 +31,51 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
       fontSize: 18,
       height: 44,
     },
+    listBusNum: {
+      flex: 1,
+      flexDirection: 'column',
+      padding: 10,
+      fontSize: 30,
+      fontWeight: 'bold',
+    },
+    listBusDate: {
+      flex: 1,
+      flexDirection: 'column',
+      marginLeft: -50,
+    },
+    listBusStation: {
+      paddingLeft: 12,
+    },
+    listBusStation2: {
+      paddingLeft: 7,
+      marginRight: 20,
+    },
+    reviewBlue: {
+      color: 'blue',
+    },
+    reviewRed: {
+      color: 'red',
+    },
+    reviewBlack: {
+      color: 'black',
+    },
+    elem: {
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      borderColor: '#eee',
+      borderBottomWidth: 0.5,
+      padding: 5,
+    },
+    itmeView: {
+      width: '85%',
+      alignSelf: 'center',
+      borderRadius: 1,
+      elevation: 5,
+      marginTop: 10,
+      paddingBottom: 20,
+    },
   });
   return (
     <>
@@ -61,18 +106,50 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
               key: '11',
               date: '2021.06.16(월요일) 09:51',
               departure: '가림고등학교',
+              arrival: '인하공업전문대학',
+              reviewable: 'no',
+            },
+            {
+              key: '77',
+              date: '2021.08.08(일요일) 02:31',
+              departure: '휘네집',
+              arrival: '고양이천국',
               reviewable: 'no',
             },
           ]}
           renderItem={({item}) => (
-            <Text style={styles.listItem}>
-              {item.key} , {item.date} , {item.departure} , {item.arrival} ,
-              {item.reviewable === 'yes'
-                ? '리뷰가능'
-                : item.reviewable === 'done'
-                ? '리뷰완료'
-                : '리뷰불가'}
-            </Text>
+            <>
+              <View style={styles.itmeView}>
+                <View style={styles.elem}>
+                  <Text style={styles.listBusNum}>{item.key}</Text>
+                  <Text style={styles.listBusDate}>{item.date}</Text>
+                </View>
+                <Text style={styles.listBusStation}>
+                  출발지: {item.departure}
+                </Text>
+                <Text style={styles.listBusStation}>🚌</Text>
+                <View style={styles.elem}>
+                  <Text style={styles.listBusStation2}>
+                    도착지: {item.arrival}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.listBusStation2,
+                      item.reviewable === 'yes'
+                        ? styles.reviewBlue
+                        : item.reviewable === 'no'
+                        ? styles.reviewRed
+                        : styles.reviewBlack,
+                    ]}>
+                    {item.reviewable === 'yes'
+                      ? '리뷰가능'
+                      : item.reviewable === 'done'
+                      ? '리뷰완료'
+                      : '리뷰불가'}
+                  </Text>
+                </View>
+              </View>
+            </>
           )}
         />
       </View>

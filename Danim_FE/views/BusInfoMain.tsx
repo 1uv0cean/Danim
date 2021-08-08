@@ -1,13 +1,13 @@
 import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
-import Bus from './FavoritesBus';
-import Station from './FavoritesStation';
+import Info1 from './BusInfo1';
+import Info2 from './BusInfo2';
 
 const topNavitgator = createMaterialTopTabNavigator(
   {
-    버스: {screen: Bus},
-    정류장: {screen: Station},
+    여의도환승센터방면: {screen: Info1},
+    경원여객방면: {screen: Info2},
   },
   {
     tabBarOptions: {
@@ -26,10 +26,10 @@ const topNavitgator = createMaterialTopTabNavigator(
 
 const AppContainer = createAppContainer(topNavitgator);
 
-const Favorites = () => {
+const busInfo = () => {
     return( 
       <AppContainer></AppContainer>
     );
 };
 
-export default Favorites
+export default busInfo
