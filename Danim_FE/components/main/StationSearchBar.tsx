@@ -12,6 +12,7 @@ import {
   View,
   FlatList,
   TextInput,
+  Alert,
 } from 'react-native';
 
 const stationSearchBar = () => {
@@ -31,18 +32,18 @@ const stationSearchBar = () => {
       });
   }, []);
 
-  const searchFilterFunction = (text) => {
+  const searchFilterFunction = (text: React.SetStateAction<string>) => {
     // Check if searched text is not blank
     if (text) {
       // Inserted text is not blank
       // Filter the masterDataSource
       // Update FilteredDataSource
       const newData = masterDataSource.filter(
-        function (item) {
+        function (item: { title: any; }) {
           const itemData = item.title
             ? item.title.toUpperCase()
             : ''.toUpperCase();
-          const textData = text.toUpperCase();
+          const textData = text.toString().toUpperCase();
           return itemData.indexOf(textData) > -1;
       });
       setFilteredDataSource(newData);
@@ -55,7 +56,7 @@ const stationSearchBar = () => {
     }
   };
 
-  const ItemView = ({item}) => {
+  const ItemView = ({item}:any) => {
     return (
       // Flat List Item
       <Text
@@ -81,9 +82,9 @@ const stationSearchBar = () => {
     );
   };
 
-  const getItem = (item) => {
+  const getItem = (item: { id: string; title: string; }) => {
     // Function for click on an item
-    alert('Id : ' + item.id + ' Title : ' + item.title);
+    Alert.alert('Id : ' + item.id + ' Title : ' + item.title);
   };
 
   return (
