@@ -16,22 +16,34 @@ const Bus = () => {
     <View style={styles.listContainer}>
       <FlatList
         data={[
-          {key: '버스 즐겨찾기 리스트'},
-          {key: '고양이'},
-          {key: '냥'},
-          {key: '야옹'},
-          {key: '차민재'},
-          {key: '홍주희'},
-          {key: '이샘미'},
-          {key: '한선희'},
-          {key: '송휘'},
-          {key: '조규철'},
-          {key: '김경원'},
-          {key: '모죽'},
-          {key: '얍'},
-          {key: '나와라'},
+          {
+            key: '0000',
+            busNumber: '641',
+            type: '간선버스',
+          },
+          {
+            key: '0001',
+            busNumber: '5413',
+            type: '지선버스',
+          },
+          {
+            key: '0002',
+            busNumber: '5524',
+            type: '지선버스',
+          },
+          {
+            key: '0003',
+            busNumber: '643',
+            type: '간선버스',
+          },
         ]}
-        renderItem={({item}) => <Text style={styles.listItem}>{item.key}</Text>}
+        renderItem={({item}) => (
+          <Text style={styles.listItem}>
+            {item.busNumber}
+            {'/'}
+            {item.type}
+          </Text>
+        )}
       />
     </View>
   );
