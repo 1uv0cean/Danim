@@ -33,19 +33,28 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
       fontSize: 30,
       fontWeight:'bold',
      },
-     listBusDate: {
+    listBusDate: {
        flex: 1,
        flexDirection:'column',
        marginLeft:-50,
-     },
-     listBusStation:{
+    },
+    listBusStation:{
        paddingLeft: 12,
-     },
-     listBusStation2:{
+    },
+    listBusStation2:{
       paddingLeft: 7,
       marginRight: 20,
     },
-     elem: {
+    reviewBlue:{
+      color: 'blue',
+    },
+    reviewRed:{
+      color: 'red',
+    },
+    reviewBlack:{
+      color: 'black',
+    },
+    elem: {
       width: '100%',
       flexDirection: 'row',
       alignItems: 'center',
@@ -122,7 +131,13 @@ const ReservationList: React.FunctionComponent = ({route}: any) => {
               <Text style={styles.listBusStation2}>
                 도착지: {item.arrival}
               </Text>
-              <Text style={styles.listBusStation2}>
+              <Text style={[styles.listBusStation2, 
+                item.reviewable ==='yes'
+                 ? styles.reviewBlue 
+                 : item.reviewable === 'no'
+                 ? styles.reviewRed
+                 : styles.reviewBlack
+                 ]}>
                 {item.reviewable === 'yes'
                   ? '리뷰가능'
                   : item.reviewable === 'done'
