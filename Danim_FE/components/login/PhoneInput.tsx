@@ -4,8 +4,14 @@ import styled from 'styled-components/native';
 const TextInput = styled.TextInput`
   border-color: gray;
   border-width: 1px;
+  width: 65%;
   justify-content: center;
   align-items: center;
+  marginLeft : 10px;
+  borderTopLeftRadius: 5px;
+  borderTopRightRadius: 5px;
+  borderBottomLeftRadius: 5px;
+  borderBottomRightRadius: 5px;
 `;
 
 interface Props {
