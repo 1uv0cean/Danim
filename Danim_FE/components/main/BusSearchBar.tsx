@@ -15,8 +15,8 @@ import {
   Alert,
 } from 'react-native';
 import {funcGetWholeBus} from '../../function/funcGetWholeBus';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { HomeScreens, HomeStackParamList } from '../../navigators/index';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {HomeScreens, HomeStackParamList} from '../../navigators/index';
 
 type BusInfoMainScreenNavigationProps = StackNavigationProp<
   HomeStackParamList, // navigators/HomeStackNavigators/index.tsx 에서 지정했던 HomeStackParamList
@@ -28,8 +28,7 @@ interface BusInfoMainScreenProps {
   userPhone: any;
 }
 
-
-const busSearchBar : React.FunctionComponent<BusInfoMainScreenProps> = props => {
+const busSearchBar: React.FunctionComponent<BusInfoMainScreenProps> = props => {
   const {navigation} = props;
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
@@ -52,7 +51,7 @@ const busSearchBar : React.FunctionComponent<BusInfoMainScreenProps> = props => 
 
   const searchFilterFunction = (text: React.SetStateAction<string>) => {
     if (text) {
-      const newData = masterDataSource.filter(function (item: { 노선번호: any; }) {
+      const newData = masterDataSource.filter(function (item: {노선번호: any}) {
         const itemData = item.노선번호
           ? item.노선번호.toUpperCase()
           : ''.toUpperCase();
@@ -67,10 +66,11 @@ const busSearchBar : React.FunctionComponent<BusInfoMainScreenProps> = props => 
     }
   };
 
-  const ItemView = ({item}:any) => {
+  const ItemView = ({item}: any) => {
     return (
       // Flat List Item
-      <Text style={styles.itemStyle} 
+      <Text
+        style={styles.itemStyle}
         onPress={() => navigation.navigate(HomeScreens.BusInfoMain)}>
         {/* {item.노선번호} */}
 
