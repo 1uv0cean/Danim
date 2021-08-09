@@ -15,6 +15,9 @@ import Favorites from '../views/FavoritesMain';
 import EditRegistration from '../views/EditRegistration';
 import WriteReview from '../views/WriteReview';
 import Reservation from '../views/Reservation';
+import WriteComment from '../views/WriteComment';
+import Reserved from '../views/Reserved';
+import BusInfoMain from '../views/BusInfoMain';
 
 export enum HomeScreens {
   Login = 'Login',
@@ -27,6 +30,9 @@ export enum HomeScreens {
   WriteReview = 'WriteReview',
   TabNavigator = 'TabNavigator',
   Reservation = 'Reservation',
+  WriteComment = 'WriteComment',
+  Reserved = 'Reserved',
+  BusInfoMain = 'BusInfoMain',
 }
 
 export type HomeStackParamList = {
@@ -41,6 +47,9 @@ export type HomeStackParamList = {
   TabNavigator: any;
   names: any;
   Reservation: any;
+  WriteComment: any;
+  Reserved: any;
+  BusInfoMain: any;
 };
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
@@ -99,13 +108,22 @@ const HomeStackNavigator: React.FunctionComponent = () => {
           name={HomeScreens.TabNavigator}
           component={TabNavigator}
         />
-        <HomeStack.Screen name={HomeScreens.Main} component={Main} />
-        <HomeStack.Screen name={HomeScreens.Register} component={Register} />
+        <HomeStack.Screen 
+          name={HomeScreens.Main} 
+          component={Main} 
+        />
+        <HomeStack.Screen 
+          name={HomeScreens.Register} 
+          component={Register} 
+        />
         <HomeStack.Screen
           name={HomeScreens.RegisterWait}
           component={RegisterWait}
         />
-        <HomeStack.Screen name={HomeScreens.MyPage} component={MyPage} />
+        <HomeStack.Screen 
+          name={HomeScreens.MyPage} 
+          component={MyPage} 
+        />
         <HomeStack.Screen
           name={HomeScreens.EditProfile}
           component={EditProfile}
@@ -121,6 +139,18 @@ const HomeStackNavigator: React.FunctionComponent = () => {
         <HomeStack.Screen
           name={HomeScreens.Reservation}
           component={Reservation}
+        />
+        <HomeStack.Screen
+          name={HomeScreens.WriteComment}
+          component={WriteComment}
+        />
+        <HomeStack.Screen
+          name={HomeScreens.Reserved}
+          component={Reserved}
+        />
+        <HomeStack.Screen
+          name={HomeScreens.BusInfoMain}
+          component={BusInfoMain}
         />
       </HomeStack.Navigator>
     </NavigationContainer>

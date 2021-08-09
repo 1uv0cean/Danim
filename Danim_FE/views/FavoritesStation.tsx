@@ -5,34 +5,47 @@ const Station = () => {
   const styles = StyleSheet.create({
     listContainer: {
       flex: 1,
-     },
+    },
     listItem: {
-       padding: 10,
-       fontSize: 18,
-       height: 44,
-     },
-  })
+      padding: 10,
+      fontSize: 18,
+      height: 44,
+    },
+  });
   return (
     <View style={styles.listContainer}>
-        <FlatList
-          data={[
-            { key: '정류장 즐겨찾기 리스트' },
-            { key: '고양이' },
-            { key: '냥' },
-            { key: '야옹' },
-            { key: '차민재' },
-            { key: '홍주희' },
-            { key: '이샘미' },
-            { key: '한선희' },
-            { key: '송휘' },
-            { key: '조규철' },
-            { key: '김경원' },
-            { key: '모죽' },
-            { key: '얍' },
-            { key: '나와라' },
-          ]}
-          renderItem={({ item }) => <Text style={styles.listItem}>{item.key}</Text>} />
-      </View>
+      <FlatList
+        data={[
+          {
+            key: 'S0000',
+            stationId: '22566',
+            stationName: '방배(백석예술대)역',
+            goTo: '방배(백석예술대)역.서초프라자약국 방면',
+          },
+          {
+            key: 'S0000',
+            stationId: '23827',
+            stationName: '양재역',
+            goTo: '도곡개포한신아파트 방면',
+          },
+          {
+            key: 'S0000',
+            stationId: '22298',
+            stationName: 'AT센터.양재꽃시장',
+            goTo: '하나로마트.코트라 방면',
+          },
+        ]}
+        renderItem={({item}) => (
+          <Text style={styles.listItem}>
+            {item.stationName}
+            {'/'}
+            {item.stationId}
+            {'/'}
+            {item.goTo}
+          </Text>
+        )}
+      />
+    </View>
   );
 };
 
