@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-native-paper';
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import Info1 from './BusInfo1';
@@ -26,10 +27,12 @@ const topNavitgator = createMaterialTopTabNavigator(
 
 const AppContainer = createAppContainer(topNavitgator);
 
-const busInfo = () => {
+const busInfoMain = () => {
     return( 
-      <AppContainer></AppContainer>
+      <>
+        <AppContainer></AppContainer>
+      </>
     );
 };
 
-export default busInfo
+export default busInfoMain
