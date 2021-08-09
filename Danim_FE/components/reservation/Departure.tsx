@@ -38,4 +38,8 @@ class DeparturePicker extends Component {
     );
   }
 }
+<<<<<<< HEAD
+export default DeparturePicker; 
+=======
 export default DeparturePicker;
+>>>>>>> c0cc1a26836dc91f0d8304da830abd033e7b5530

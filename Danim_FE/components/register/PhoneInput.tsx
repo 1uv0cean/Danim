@@ -6,6 +6,13 @@ const TextInput = styled.TextInput`
   border-width: 1px;
   justify-content: center;
   align-items: center;
+  width: 95%;
+  padding: 7px;
+  margin-left: 10px;
+  borderTopLeftRadius: 5px;
+  borderTopRightRadius: 5px;
+  borderBottomLeftRadius: 5px;
+  borderBottomRightRadius: 5px;
 `;
 
 interface Props {
@@ -15,7 +22,7 @@ interface Props {
 const PhoneInput: React.FC<Props> = (props: Props) => {
   return (
     <TextInput
-      placeholder=" 예)01012345678 "
+      placeholder=" 예) 01012345678 "
       keyboardType="numeric"
       placeholderTextColor="#2C3E50"
       onChangeText={value => props.setterUserPhone(value)}
