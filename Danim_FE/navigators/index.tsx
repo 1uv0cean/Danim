@@ -18,6 +18,8 @@ import Reservation from '../views/Reservation';
 import WriteComment from '../views/WriteComment';
 import Reserved from '../views/Reserved';
 import BusInfoMain from '../views/BusInfoMain';
+import StationInfo from '../views/StationInfo';
+import Station from '../views/FavoritesStation';
 
 export enum HomeScreens {
   Login = 'Login',
@@ -33,6 +35,7 @@ export enum HomeScreens {
   WriteComment = 'WriteComment',
   Reserved = 'Reserved',
   BusInfoMain = 'BusInfoMain',
+  StationInfo = 'StationInfo',
 }
 
 export type HomeStackParamList = {
@@ -50,6 +53,7 @@ export type HomeStackParamList = {
   WriteComment: any;
   Reserved: any;
   BusInfoMain: any;
+  StationInfo: any;
 };
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
@@ -151,6 +155,10 @@ const HomeStackNavigator: React.FunctionComponent = () => {
         <HomeStack.Screen
           name={HomeScreens.BusInfoMain}
           component={BusInfoMain}
+        />
+        <HomeStack.Screen
+          name={HomeScreens.StationInfo}
+          component={StationInfo}
         />
       </HomeStack.Navigator>
     </NavigationContainer>
