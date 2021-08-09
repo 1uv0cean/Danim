@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components/native';
 import LoginCheckBox from '../components/login/LoginCheckbox';
 import PhoneInput from '../components/login/PhoneInput';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { HomeScreens, HomeStackParamList } from '../navigators/index';
-import { useState } from 'react';
-import { Alert, StyleSheet, Text, Image, View } from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {HomeScreens, HomeStackParamList} from '../navigators/index';
+import {useState} from 'react';
+import {Alert, StyleSheet, Text, Image, View} from 'react-native';
 import axios from 'axios';
-import { funcLogin } from '../function/funcLogin';
-import { Button } from 'react-native-paper';
+import {funcLogin} from '../function/funcLogin';
+import {Button} from 'react-native-paper';
 
 type LoginScreenNavigationProps = StackNavigationProp<
   HomeStackParamList, // navigators/HomeStackNavigators/index.tsx 에서 지정했던 HomeStackParamList
@@ -38,14 +38,14 @@ const styles = StyleSheet.create({
   LoginButton: {
     width: '30%',
     backgroundColor: '#2C3E50',
-    padding: 4
+    padding: 4,
   },
   RegisterButton: {
     height: 50,
     backgroundColor: '#2C3E50',
-    marginTop:20,
+    marginTop: 20,
     margin: 10,
-    padding: 4
+    padding: 4,
   },
   Text: {
     fontSize: 16,
@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
     height: 130,
     alignSelf: 'center',
     marginBottom: 120,
-    marginTop: 60
+    marginTop: 60,
   },
-})
+});
 
 const Container = styled.View`
   justify-content: center;
@@ -70,7 +70,7 @@ const CheckBoxView = styled.View`
   flex-direction: row;
   height: 40px;
   margin-left: 63%;
-  margin-top: 2%
+  margin-top: 2%;
 `;
 
 const MainText = styled.Text`
@@ -94,7 +94,7 @@ const SMButton = styled.Button`
 `;
 
 const Login: React.FunctionComponent<LoginScreenProps> = props => {
-  const { navigation } = props;
+  const {navigation} = props;
   const [userPhone, setUserPhone] = useState<string>('');
 
   // author : 차민재
@@ -107,7 +107,7 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
   const doLogin = async () => {
     try {
       // return value : user Phone number
-      let getLoginResult = await funcLogin({ userPhone });
+      let getLoginResult = await funcLogin({userPhone});
       if (getLoginResult) {
         navigation.navigate(HomeScreens.TabNavigator, {
           userPhone: userPhone,
@@ -122,31 +122,30 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
 
   return (
     <Container>
-      <Image
-        style={styles.LogoImage}
-        source={require('../img/Logo.png')}
-      />
+      <Image style={styles.LogoImage} source={require('../img/Logo.png')} />
       <View style={{flexDirection: 'row'}}>
-      <PhoneInput setterUserPhone={setterUserPhone} />
-      <Button style={styles.LoginButton} onPress={doLogin}>
-        {/* onPress={() => navigation.navigate(HomeScreens.Main, {symbol})} */}
-        <Text style={styles.Text}>로그인</Text>
-      </Button>
+        <PhoneInput setterUserPhone={setterUserPhone} />
+        <Button style={styles.LoginButton} onPress={doLogin}>
+          {/* onPress={() => navigation.navigate(HomeScreens.Main, {symbol})} */}
+          <Text style={styles.Text}>로그인</Text>
+        </Button>
       </View>
-      <Button style={styles.RegisterButton} onPress={() => navigation.navigate(HomeScreens.Register)}>
+      <Button
+        style={styles.RegisterButton}
+        onPress={() => navigation.navigate(HomeScreens.Register)}>
         <Text style={styles.Text}>회원가입</Text>
       </Button>
       <CheckBoxView>
         <LoginCheckBox />
         <MainText>자동 로그인</MainText>
       </CheckBoxView>
-      
+
       {/* <SMButton
         onPress={() => navigation.navigate(HomeScreens.WriteReview)}
         color="#2C3E50"
         title="WriteReview"
       /> */}
-      
+
       {/* <ServerButton onPress={fetchTest} color="#2C3E50" title="서버테스트" /> */}
     </Container>
   );

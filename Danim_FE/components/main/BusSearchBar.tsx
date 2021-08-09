@@ -4,23 +4,13 @@
 // import React in our code
 import React, {useState, useEffect} from 'react';
 //import {funcGetSelBusStop} from '../../function/funcGetSelBusStop';
-import {
-  Text,
-  StyleSheet,
-  View,
-  FlatList,
-  TextInput,
-  Alert,
-} from 'react-native';
+import {Text, StyleSheet, View, FlatList, TextInput, Alert} from 'react-native';
 import {funcGetWholeBus} from '../../function/funcGetWholeBus';
-import { HomeScreens } from '../../navigators/index';
-import { useNavigation } from '@react-navigation/native';
-
-
-
+import {HomeScreens} from '../../navigators/index';
+import {useNavigation} from '@react-navigation/native';
 
 const busSearchBar = () => {
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -42,7 +32,7 @@ const busSearchBar = () => {
 
   const searchFilterFunction = (text: React.SetStateAction<string>) => {
     if (text) {
-      const newData = masterDataSource.filter(function (item: { 노선번호: any; }) {
+      const newData = masterDataSource.filter(function (item: {노선번호: any}) {
         const itemData = item.노선번호
           ? item.노선번호.toUpperCase()
           : ''.toUpperCase();
@@ -57,12 +47,15 @@ const busSearchBar = () => {
     }
   };
 
-  const ItemView = ({item}:any) => {
+  const ItemView = ({item}: any) => {
+    const busNumber = item.노선번호;
     return (
       // Flat List Item
-      <Text style={styles.itemStyle} 
+      <Text
+        style={styles.itemStyle}
         onPress={() =>
-        navigation.navigate(HomeScreens.BusInfoMain)}>
+          navigation.navigate(HomeScreens.BusInfoMain, {busNumber: busNumber})
+        }>
         {/* {item.노선번호} */}
 
         {/* {'.'} */}
