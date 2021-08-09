@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 
-const info2 = () => {
+const busInfo2 = () => {
   const styles = StyleSheet.create({
     listContainer: {
       flex: 1,
@@ -36,4 +36,4 @@ const info2 = () => {
   );
 };
 
-export default info2;
+export default busInfo2;

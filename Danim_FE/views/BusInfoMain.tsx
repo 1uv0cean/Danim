@@ -1,8 +1,10 @@
 import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
+import BusInfoTitle from '../components/busInfo/BusInfoTitle';
 import Info1 from './BusInfo1';
 import Info2 from './BusInfo2';
+import GoToReservationButoon from '../components/busInfo/GoToReservationButton';
 
 const topNavitgator = createMaterialTopTabNavigator(
   {
@@ -11,7 +13,7 @@ const topNavitgator = createMaterialTopTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: '#2C3E50',
+      activeTintColor: '#222324',
       inactiveTintColor: '#8f9499',
       style: {
         backgroundColor: '#FFFFFF',
@@ -26,10 +28,14 @@ const topNavitgator = createMaterialTopTabNavigator(
 
 const AppContainer = createAppContainer(topNavitgator);
 
-const busInfo = () => {
+const busInfoMain = () => {
     return( 
-      <AppContainer></AppContainer>
+      <>
+        <BusInfoTitle/>
+        <AppContainer></AppContainer>
+        <GoToReservationButoon/>
+      </>
     );
 };
 
-export default busInfo
+export default busInfoMain

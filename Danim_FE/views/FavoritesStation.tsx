@@ -23,13 +23,13 @@ const Station = () => {
             goTo: '방배(백석예술대)역.서초프라자약국 방면',
           },
           {
-            key: 'S0000',
+            key: 'S0001',
             stationId: '23827',
             stationName: '양재역',
             goTo: '도곡개포한신아파트 방면',
           },
           {
-            key: 'S0000',
+            key: 'S0002',
             stationId: '22298',
             stationName: 'AT센터.양재꽃시장',
             goTo: '하나로마트.코트라 방면',
