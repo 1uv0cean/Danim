@@ -48,11 +48,14 @@ const busSearchBar = () => {
   };
 
   const ItemView = ({item}: any) => {
+    const busNumber = item.노선번호;
     return (
       // Flat List Item
       <Text
         style={styles.itemStyle}
-        onPress={() => navigation.navigate(HomeScreens.BusInfoMain)}>
+        onPress={() =>
+          navigation.navigate(HomeScreens.BusInfoMain, {busNumber: busNumber})
+        }>
         {/* {item.노선번호} */}
 
         {/* {'.'} */}
