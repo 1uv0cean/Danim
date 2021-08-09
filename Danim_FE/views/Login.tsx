@@ -122,31 +122,9 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
 
   return (
     <Container>
-<<<<<<< HEAD
       <Image
         style={styles.LogoImage}
         source={require('../img/Logo.png')}
-=======
-      <PhoneInput setterUserPhone={setterUserPhone} />
-      <EmptyView />
-      <LoginButton
-        // onPress={() => navigation.navigate(HomeScreens.Main, {symbol})}
-        onPress={doLogin}
-        color="#2C3E50"
-        title="로그인"
-      />
-      <EmptyView />
-      <RegisterButton
-        onPress={() => navigation.navigate(HomeScreens.Register)}
-        color="#2C3E50"
-        title="회원가입"
-      />
-      <EmptyView />
-      <SMButton
-        onPress={() => navigation.navigate(HomeScreens.Reserved)}
-        color="#2C3E50"
-        title="Reserved"
->>>>>>> c0cc1a26836dc91f0d8304da830abd033e7b5530
       />
       <View style={{flexDirection: 'row'}}>
       <PhoneInput setterUserPhone={setterUserPhone} />
