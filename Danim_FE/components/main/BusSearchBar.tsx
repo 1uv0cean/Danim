@@ -3,33 +3,14 @@
 
 // import React in our code
 import React, {useState, useEffect} from 'react';
-import {funcGetSelBusStop} from '../../function/funcGetSelBusStop';
-// import all the components we are going to use
-import {
-  SafeAreaView,
-  Text,
-  StyleSheet,
-  View,
-  FlatList,
-  TextInput,
-  Alert,
-} from 'react-native';
+//import {funcGetSelBusStop} from '../../function/funcGetSelBusStop';
+import {Text, StyleSheet, View, FlatList, TextInput, Alert} from 'react-native';
 import {funcGetWholeBus} from '../../function/funcGetWholeBus';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {HomeScreens, HomeStackParamList} from '../../navigators/index';
+import {HomeScreens} from '../../navigators/index';
+import {useNavigation} from '@react-navigation/native';
 
-type BusInfoMainScreenNavigationProps = StackNavigationProp<
-  HomeStackParamList, // navigators/HomeStackNavigators/index.tsx 에서 지정했던 HomeStackParamList
-  HomeScreens.BusInfoMain // enum 으로 지정했던 타입 중 Main 에 해당하는 부분
->;
-
-interface BusInfoMainScreenProps {
-  navigation: BusInfoMainScreenNavigationProps; // 네비게이션 속서에 대한 타입으로 방금 지정해주었던 MainScreenNavigationProps 을 지정
-  userPhone: any;
-}
-
-const busSearchBar: React.FunctionComponent<BusInfoMainScreenProps> = props => {
-  const {navigation} = props;
+const busSearchBar = () => {
+  const navigation = useNavigation();
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);

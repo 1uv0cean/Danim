@@ -13,9 +13,10 @@ import Search from '../views/SearchMain';
 import ReservationList from '../views/ReservationList';
 import Favorites from '../views/FavoritesMain';
 import EditRegistration from '../views/EditRegistration';
-import WriteReview from '../views/WriteReview';
+import WriteReview from '../views/WriteComment';
 import Reservation from '../views/Reservation';
 import WriteComment from '../views/WriteComment';
+import Reserved from '../views/Reserved';
 import BusInfoMain from '../views/BusInfoMain';
 
 export enum HomeScreens {
@@ -30,6 +31,7 @@ export enum HomeScreens {
   TabNavigator = 'TabNavigator',
   Reservation = 'Reservation',
   WriteComment = 'WriteComment',
+  Reserved = 'Reserved',
   BusInfoMain = 'BusInfoMain',
 }
 
@@ -46,6 +48,7 @@ export type HomeStackParamList = {
   names: any;
   Reservation: any;
   WriteComment: any;
+  Reserved: any;
   BusInfoMain: any;
 };
 
@@ -140,6 +143,10 @@ const HomeStackNavigator: React.FunctionComponent = () => {
         <HomeStack.Screen
           name={HomeScreens.WriteComment}
           component={WriteComment}
+        />
+        <HomeStack.Screen
+          name={HomeScreens.Reserved}
+          component={Reserved}
         />
         <HomeStack.Screen
           name={HomeScreens.BusInfoMain}

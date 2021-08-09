@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, Button, Alert, ImageBackground, View} from 'react-native';
+import {Text, Alert, ImageBackground, View} from 'react-native';
 import NameInput from '../components/register/NameInput';
 import PhoneInput from '../components/register/PhoneInput';
 import {HomeScreens, HomeStackParamList} from '../navigators/index';
@@ -13,15 +13,37 @@ import ImagePicker from 'react-native-image-crop-picker';
 import {funcPostSMS} from '../function/funcSendMessage';
 import {funcCheckDuplicate} from '../function/funcCheckDuplicate';
 import CertificationInput from '../components/register/CertificationInput';
-
-const EmptyView = styled.View`
-  flex: 0.05;
-`;
+import { StyleSheet } from 'react-native';
+import {Button} from 'react-native-paper';
 
 const Container = styled.View`
   justify-content: center;
   flex: 1;
 `;
+
+const styles = StyleSheet.create({
+  Text: {
+    fontSize: 15,
+    margin: 10,
+    marginLeft: 15,
+    fontWeight: 'bold'
+  },
+  Button: {
+    height: 40,
+    backgroundColor: '#2C3E50',
+    margin: 12,
+    marginBottom: 0
+  },
+  ConfirmBotton: {
+    backgroundColor: '#2C3E50',
+    width: '30%',
+    padding: 4
+  },
+  ButtonText: {
+    fontSize: 15,
+    color: '#FFFFFF'
+  }
+});
 
 type RegisterScreenNavigationProps = StackNavigationProp<
   HomeStackParamList,
@@ -149,37 +171,39 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
 
   return (
     <Container>
-      <Text>이름</Text>
+      <Text style={styles.Text}>이름</Text>
       <NameInput setterUserName={setterUserName} />
-      <EmptyView />
-      <Text>휴대폰 번호</Text>
+      <Text style={styles.Text}>휴대폰 번호</Text>
       <PhoneInput setterUserPhone={setterUserPhone} />
-      <EmptyView />
       <Button
-        onPress={doCheckDuplicate}
-        color="#2C3E50"
-        title="회원정보 확인"
-      />
-      <EmptyView />
-      <Button onPress={doSMS} color="#2C3E50" title="인증번호 전송" />
-      <EmptyView />
-      <Text>인증번호</Text>
+        style={styles.Button}
+        onPress={doCheckDuplicate}>
+          <Text style={styles.ButtonText}>회원정보 확인</Text>
+          </Button>
+      <Button
+        style={styles.Button}
+        onPress={doSMS}>
+          <Text style={styles.ButtonText}>인증번호 전송</Text>
+          </Button>
+      <Text style={styles.Text}>인증번호</Text>
+      <View style={{flexDirection: 'row'}}>
       <CertificationInput setterCertifyNumber={setterCertifyNumber} />
-      <Button onPress={doCheckCertify} color="#2C3E50" title="확인" />
-      <EmptyView />
-      <Text>장애인 증명서</Text>
+      <Button
+        style={styles.ConfirmBotton}
+        onPress={doCheckCertify}>
+          <Text style={styles.ButtonText}>확인</Text>
+          </Button>
+      </View>
+      <Text style={styles.Text}>장애인 증명서</Text>
       <View style={{alignItems: 'center'}}>
         <ImageBackground
           source={{uri: userCertify}}
-          style={{width: 200, height: 100, alignItems: 'center'}}
+          style={{width: 200, height: 40, alignItems: 'center'}}
           imageStyle={{borderRadius: 10}}
         />
       </View>
-      <EmptyView />
-      <EmptyView />
-      <EmptyView />
-      <EmptyView />
-      <Button
+      <Button 
+        style={styles.Button}
         onPress={() => {
           console.log('사진 선택하기');
           ImagePicker.openPicker({
@@ -192,15 +216,13 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
             console.log('사진!!!!: ' + imgPath);
           });
         }}
-        color="#2C3E50"
-        title="첨부"
-      />
-
-      <Text>관리자가 회원가입을 승인할 때까지 앱 사용이 제한됩니다.</Text>
-      <EmptyView />
-      <EmptyView />
-      <EmptyView />
-      <Button onPress={() =>
+      ><Text style={styles.ButtonText}>첨부</Text>
+      </Button>
+      <Text style={{fontSize: 15, textAlign: 'center', marginTop:8}}>
+        관리자가 회원가입을 승인할 때까지 앱 사용이 제한됩니다.</Text>
+      <Button
+        style={styles.Button} 
+        onPress={() =>
         {
           setUserCertify(userPhone+'_imgCertification.jpg')
 
@@ -233,7 +255,9 @@ const Register: React.FunctionComponent<RegisterScreenProps> = props => {
 
             doRegister();
           }
-        } color="#2C3E50" title="완료" />
+        }>
+          <Text style={styles.ButtonText}>완료</Text>
+          </Button>
     </Container>
   );
 };
