@@ -8,8 +8,10 @@ import GoToReservationButoon from '../components/busInfo/GoToReservationButton';
 
 const topNavitgator = createMaterialTopTabNavigator(
   {
-    여의도환승센터방면: {screen: Info1},
-    경원여객방면: {screen: Info2},
+    문래동방면: {
+      screen: Info1,
+    },
+    양재동방면: {screen: Info2},
   },
   {
     tabBarOptions: {
@@ -26,16 +28,28 @@ const topNavitgator = createMaterialTopTabNavigator(
   },
 );
 
+// type RouteMapScreenNavigationProps = StackNavigationProp<
+//   HomeStackParamList,
+//   HomeScreens.RouteMap
+// >;
+
+interface RouteMapScreenProps {
+  // navigation: RouteMapScreenNavigationProps;
+  route: any;
+}
+
 const AppContainer = createAppContainer(topNavitgator);
 
-const busInfoMain = () => {
-    return( 
-      <>
-        <BusInfoTitle/>
-        <AppContainer></AppContainer>
-        <GoToReservationButoon/>
-      </>
-    );
+const busInfoMain: React.FunctionComponent<RouteMapScreenProps> = props => {
+  const busNumber = props.route.params.busNumber;
+  console.log('BUSNUMBER main : ', busNumber);
+  return (
+    <>
+      <BusInfoTitle />
+      <AppContainer></AppContainer>
+      <GoToReservationButoon />
+    </>
+  );
 };
 
-export default busInfoMain
+export default busInfoMain;

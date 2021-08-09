@@ -27,9 +27,7 @@ const topNavitgator = createMaterialTopTabNavigator(
 const AppContainer = createAppContainer(topNavitgator);
 
 const Favorites = () => {
-    return( 
-      <AppContainer></AppContainer>
-    );
+  return <AppContainer></AppContainer>;
 };
 
-export default Favorites
+export default Favorites;
