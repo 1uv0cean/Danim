@@ -13,7 +13,7 @@ import Search from '../views/SearchMain';
 import ReservationList from '../views/ReservationList';
 import Favorites from '../views/FavoritesMain';
 import EditRegistration from '../views/EditRegistration';
-import WriteReview from '../views/WriteReview';
+import WriteReview from '../views/WriteComment';
 import Reservation from '../views/Reservation';
 import WriteComment from '../views/WriteComment';
 import Reserved from '../views/Reserved';
