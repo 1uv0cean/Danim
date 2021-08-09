@@ -53,12 +53,18 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   LogoImage: {
-    width: 130,
-    height: 130,
+    width: '58%',
+    height: '25%',
     alignSelf: 'center',
-    marginBottom: 120,
+    marginBottom: 50,
     marginTop: 60
   },
+  LogoText: {
+    color: '#2C3E50',
+    fontSize: 60,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  }
 })
 
 const Container = styled.View`
@@ -122,9 +128,10 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
 
   return (
     <Container>
+      <Text style={styles.LogoText}>Danim</Text>
       <Image
         style={styles.LogoImage}
-        source={require('../img/Logo.png')}
+        source={require('../img/logo.png')}
       />
       <View style={{flexDirection: 'row'}}>
       <PhoneInput setterUserPhone={setterUserPhone} />
