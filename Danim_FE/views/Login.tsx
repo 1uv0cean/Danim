@@ -53,13 +53,19 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   LogoImage: {
-    width: 130,
-    height: 130,
+    width: '58%',
+    height: '25%',
     alignSelf: 'center',
-    marginBottom: 120,
-    marginTop: 60,
+    marginBottom: 50,
+    marginTop: 60
   },
-});
+  LogoText: {
+    color: '#2C3E50',
+    fontSize: 60,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  }
+})
 
 const Container = styled.View`
   justify-content: center;
@@ -122,7 +128,11 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
 
   return (
     <Container>
-      <Image style={styles.LogoImage} source={require('../img/Logo.png')} />
+      <Text style={styles.LogoText}>Danim</Text>
+      <Image
+        style={styles.LogoImage}
+        source={require('../img/logo.png')}
+      />
       <View style={{flexDirection: 'row'}}>
         <PhoneInput setterUserPhone={setterUserPhone} />
         <Button style={styles.LoginButton} onPress={doLogin}>
