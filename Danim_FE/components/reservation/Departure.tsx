@@ -30,12 +30,28 @@ class DeparturePicker extends Component {
             label="정류장을 선택해주세요."
             value="departure"
           />
-          <Picker.Item label="숙대입구역" value="a" />
-          <Picker.Item label="남영우체국" value="b" />
-          <Picker.Item label="남영동주민센터" value="c" />
+          <Picker.Item label="문래동시점" value="문래동시점" />
+          <Picker.Item label="두산위브진주아파트" value="두산위브진주아파트" />
+          <Picker.Item label="문래롯데캐슬" value="문래롯데캐슬" />
+          <Picker.Item label="문래중학교" value="문래중학교" />
+          <Picker.Item label="영문초등학교" value="영문초등학교" />
+          <Picker.Item
+            label="문래힐스테이트아파트"
+            value="문래힐스테이트아파트"
+          />
+          <Picker.Item label="문래역" value="문래역" />
+          <Picker.Item label="당산동진로아파트" value="당산동진로아파트" />
+          <Picker.Item label="김안과병원" value="김안과병원" />
+          <Picker.Item label="영등포시장" value="영등포시장" />
+          <Picker.Item
+            label="영등포시장로터리방면"
+            value="영등포시장로터리방면"
+          />
+          <Picker.Item label="신길역" value="신길역" />
+          <Picker.Item label="신길역1호선" value="신길역1호선" />
         </Picker>
       </View>
     );
   }
 }
-export default DeparturePicker; 
+export default DeparturePicker;
