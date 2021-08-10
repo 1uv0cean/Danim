@@ -1,45 +1,13 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import { Button } from 'react-native-paper';
+import RefreshButton from '../components/StationInfo/RefreshButton';
+import StationInfoTitle from '../components/StationInfo/StationInfoTitle';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-    },
-    header: {
-        width: '100%',
-        height: '23%',
-        backgroundColor: '#2C3E50',
-    },
-    StationText: {
-        color: '#FFFFFF',
-        textAlign: 'left',
-        fontSize: 35,
-        fontWeight: 'bold',
-        margin: 20,
-        marginBottom: 5,
-    },
-    StationIdText: {
-        color: '#FFFFFF',
-        textAlign: 'left',
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginLeft: 25,
-    },
-    DirectionText: {
-        color: '#FFFFFF',
-        textAlign: 'left',
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginLeft: 10,
-    },
-    AddressText: {
-        color: '#FFFFFF',
-        textAlign: 'right',
-        fontSize: 14,
-        marginTop: 12,
-        marginRight: 10,
     },
     BusText: {
         fontSize: 32,
@@ -90,31 +58,12 @@ const styles = StyleSheet.create({
         fontSize: 17,
         color: 'gray'
     },
-    RefreshImage: {
-        width: 75,
-        height: 75
-    }, 
-    footer: {
-        marginTop: '120%',
-        marginLeft: '73%',
-        position: 'absolute'
-    }
 });
 
 const StationInfo: React.FunctionComponent = ({ route }: any) => {
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.rowView}>
-                    <Text style={styles.StationText}>수암 파출소</Text>
-                </View>
-                <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.StationIdText}>21515</Text>
-                    <Text style={styles.DirectionText}>|</Text>
-                    <Text style={styles.DirectionText}>남사박 방면</Text>
-                </View>
-                <Text style={styles.AddressText}>경기도 원곡동 안산동 수인로 495</Text>
-            </View>
+            <StationInfoTitle />
             <View style={styles.listContainer}>
                 <FlatList
                     data={[
@@ -184,13 +133,7 @@ const StationInfo: React.FunctionComponent = ({ route }: any) => {
                     )}
                 />
             </View>
-            <View style={styles.footer}>
-                <TouchableOpacity>
-                    <Image
-                        style={styles.RefreshImage}
-                        source={require('../img/refresh.png')} />
-                </TouchableOpacity>
-            </View>
+            <RefreshButton />
         </View>
     );
 };
