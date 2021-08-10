@@ -1,6 +1,9 @@
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import * as React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {Button} from 'react-native-paper';
+import { HomeScreens } from '../../navigators';
 
 const styles = StyleSheet.create({
   ReservationButton: {
@@ -18,8 +21,11 @@ const styles = StyleSheet.create({
   },
 });
 const goToReservationButton = () => {
+  const navigation = useNavigation();
   return (
-    <Button style={styles.ReservationButton}>
+    <Button 
+      style={styles.ReservationButton}
+      onPress={() => navigation.navigate(HomeScreens.Reservation)}>
       <Text style={styles.Text}>예약</Text>
     </Button>
   );

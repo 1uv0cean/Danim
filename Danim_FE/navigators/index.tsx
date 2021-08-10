@@ -19,7 +19,7 @@ import WriteComment from '../views/WriteComment';
 import Reserved from '../views/Reserved';
 import BusInfoMain from '../views/BusInfoMain';
 import StationInfo from '../views/StationInfo';
-import Station from '../views/FavoritesStation';
+
 
 export enum HomeScreens {
   Login = 'Login',
