@@ -1,15 +1,29 @@
 import React from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const Station = () => {
   const styles = StyleSheet.create({
     listContainer: {
-      flex: 1,
+      backgroundColor: 'white',
     },
     listItem: {
       padding: 10,
       fontSize: 18,
-      height: 44,
+      borderBottomColor: '#2C3E50',
+      borderBottomWidth: 0.5,
+    },
+    itemTitle:{
+      fontSize: 19,
+      fontWeight: 'bold',
+    },
+    subContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    favorites: {
+      marginTop: 10,
+      marginRight: 10,
     },
   });
   return (
@@ -36,13 +50,13 @@ const Station = () => {
           },
         ]}
         renderItem={({item}) => (
-          <Text style={styles.listItem}>
-            {item.stationName}
-            {'/'}
-            {item.stationId}
-            {'/'}
-            {item.goTo}
-          </Text>
+          <View style={styles.listItem}>
+            <View style={styles.subContainer}>
+              <Text style={styles.itemTitle}>{item.stationName}</Text>
+              <Icon style={styles.favorites} name="heart" size={30} />
+            </View>
+            <Text>{item.stationId}{' | '}{item.goTo}</Text>
+          </View>
         )}
       />
     </View>
