@@ -53,11 +53,11 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   LogoImage: {
-    width: '58%',
-    height: '25%',
+    width: '75%',
+    height: '37.5%',
     alignSelf: 'center',
-    marginBottom: 50,
-    marginTop: 60
+    marginBottom: 30,
+    marginTop: 10
   },
   LogoText: {
     color: '#2C3E50',
