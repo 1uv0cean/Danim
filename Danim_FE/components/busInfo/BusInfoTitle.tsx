@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { busNumberProps } from '../../views/BusInfoMain';
 
 const styles = StyleSheet.create({
   container: {
@@ -36,11 +37,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 });
-const busInfoTitle = () => {
+const busInfoTitle = (busInfo: busNumberProps['busInfo']) => {
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
-        <Text style={styles.title}>641</Text>
+        <Text style={styles.title}>{busInfo.busNumber}</Text>
         <Icon style={styles.favorites} name="hearto" size={30} />
       </View>
       <View style={styles.subContainer}>

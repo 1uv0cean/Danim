@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import BusInfoTitle from '../components/busInfo/BusInfoTitle';
 import Info1 from './BusInfo1';
 import Info2 from './BusInfo2';
-import GoToReservationButoon from '../components/busInfo/GoToReservationButton';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { HomeScreens, HomeStackParamList } from '../navigators';
+import { funcGetSelBusStop } from '../function/funcGetSelBusStop';
+import GoToReservationButton from '../components/busInfo/GoToReservationButton';
+
+type BusInfoMainScreenNavigationProps = StackNavigationProp<
+  HomeStackParamList,
+  HomeScreens.BusInfoMain
+>;
+
+interface BusInfoMainScreenProps {
+  navigation: BusInfoMainScreenNavigationProps;
+  route: any;
+}
 
 const topNavitgator = createMaterialTopTabNavigator(
   {
-    문래동방면: {
-      screen: Info1,
-    },
-    양재동방면: {screen: Info2},
+    여의도환승센터방면: {screen: Info1},
+    경원여객방면: {screen: Info2},
   },
   {
     tabBarOptions: {
@@ -28,28 +39,27 @@ const topNavitgator = createMaterialTopTabNavigator(
   },
 );
 
-// type RouteMapScreenNavigationProps = StackNavigationProp<
-//   HomeStackParamList,
-//   HomeScreens.RouteMap
-// >;
-
-interface RouteMapScreenProps {
-  // navigation: RouteMapScreenNavigationProps;
-  route: any;
-}
-
 const AppContainer = createAppContainer(topNavitgator);
 
-const busInfoMain: React.FunctionComponent<RouteMapScreenProps> = props => {
+export interface busNumberProps {
+  busInfo: {busNumber: any}
+}
+
+
+const BusInfoMain: React.FunctionComponent<BusInfoMainScreenProps> = props => {
   const busNumber = props.route.params.busNumber;
-  console.log('BUSNUMBER main : ', busNumber);
-  return (
-    <>
-      <BusInfoTitle />
-      <AppContainer></AppContainer>
-      <GoToReservationButoon />
-    </>
-  );
+  const [busInfo, setBusInfo] = useState<busNumberProps['busInfo']>({busNumber: busNumber});
+  let getResult = funcGetSelBusStop({busNumber});
+
+  
+  return( 
+      <>
+        <BusInfoTitle {...busInfo} />
+        <AppContainer></AppContainer>
+        <GoToReservationButton/>
+      </>
+    );
 };
 
-export default busInfoMain;
+
+export default BusInfoMain

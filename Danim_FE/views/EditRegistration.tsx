@@ -104,7 +104,7 @@ const EditRegistration: React.FunctionComponent<EditRegistrationScreenProps> =
           <View style={{alignItems: 'center'}}>
             <ImageBackground
               source={{uri: imgPath}}
-              style={{width: 200, height: 150, alignItems: 'center'}}
+              style={{width: 200, height: 150, alignItems: 'center', backgroundColor: 'grey'}}
               imageStyle={{borderRadius: 10}}
             />
           </View>

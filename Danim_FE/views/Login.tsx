@@ -131,7 +131,7 @@ const Login: React.FunctionComponent<LoginScreenProps> = props => {
       <Text style={styles.LogoText}>Danim</Text>
       <Image
         style={styles.LogoImage}
-        source={require('../img/logo.png')}
+        source={require('../img/Logo.png')}
       />
       <View style={{flexDirection: 'row'}}>
         <PhoneInput setterUserPhone={setterUserPhone} />
