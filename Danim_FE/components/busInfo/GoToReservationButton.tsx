@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {Button} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/AntDesign';
 
 const styles = StyleSheet.create({
   ReservationButton: {
@@ -18,7 +17,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
 });
-const goToReservationButoon = () => {
+const goToReservationButton = () => {
   return (
     <Button style={styles.ReservationButton}>
       <Text style={styles.Text}>예약</Text>
@@ -26,4 +25,4 @@ const goToReservationButoon = () => {
   );
 };
 
-export default goToReservationButoon;
+export default goToReservationButton
