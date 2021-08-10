@@ -1,20 +1,8 @@
 import React from 'react';
-import {
-    HomeScreens,
-    HomeStackParamList,
-} from '../navigators/index';
+import {HomeScreens} from '../navigators/index';
 import { Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { Button } from 'react-native-paper';
-
-type EditRegistrationScreenNavigationProps = StackNavigationProp<
-  HomeStackParamList,
-  HomeScreens.EditRegistration
->;
-
-interface EditRegistrationScreenProps {
-    navigation: EditRegistrationScreenNavigationProps;
-  }
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     container:{
@@ -102,7 +90,8 @@ const styles = StyleSheet.create({
     },
 });
 
-const Reserved: React.FunctionComponent<EditRegistrationScreenProps> = () =>{
+const Reserved = () =>{
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <View style={styles.subjectView}>
@@ -138,7 +127,8 @@ const Reserved: React.FunctionComponent<EditRegistrationScreenProps> = () =>{
                  </View>
             </View>
             <View style={styles.buttonView}>
-                <Button style={styles.cancleButton}>
+                <Button style={styles.cancleButton}
+                onPress={() => navigation.navigate(HomeScreens.TabNavigator)}>
                     <Text style={styles.buttonText}>예약취소</Text>
                 </Button> 
             </View>
