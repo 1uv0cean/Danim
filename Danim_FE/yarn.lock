@@ -5393,9 +5393,9 @@ humanize-ms@^1.2.1:
   dependencies:
     ms "^2.0.0"
 
-i@0.3.x, i@^0.3.6:
-  version "0.3.6"
-  resolved "https://registry.npmjs.org/i/-/i-0.3.6.tgz"
+i@0.3.x, i@^0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/i/-/i-0.3.7.tgz#2a7437a923d59c14b17243dc63a549af24d85799"
 
 iconv-lite@0.4.24:
   version "0.4.24"
